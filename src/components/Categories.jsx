@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Category from "./Category";
 import styled from "styled-components";
-import { data } from "../data";
+import { categoriesData } from "../data";
 
 const Nav = styled.nav`
   display: flex;
@@ -14,15 +14,10 @@ const Nav = styled.nav`
 class Categories extends Component {
 
   render() {
-    const categories = data.category.products;
-    const uniqueCategories = [
-      "all",
-      ...new Set(categories.map((i) => i.category)),
-    ];
-
+    const categories = categoriesData.categories.map((category) => category.name);
     return (
       <Nav>
-      {uniqueCategories.map((i, index)=>{
+      {categories.map((i, index)=>{
       return <Category key={index} category={i}/>
       
       })} 

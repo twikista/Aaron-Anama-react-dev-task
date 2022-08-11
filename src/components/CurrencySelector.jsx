@@ -67,13 +67,9 @@ class CurrencySelector extends Component{
     }
 
     render(){
-        console.log(this.state)
         
         const {currencies} = currencyData
         const [renderedSymbol] = currencies.filter(i=>i.label===this.state.label?i:null)
-        if(renderedSymbol)(
-          console.log(renderedSymbol.label)
-        )
         return(
         
             <Label htmlFor="currency">
