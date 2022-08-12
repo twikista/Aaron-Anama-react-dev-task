@@ -14,37 +14,6 @@ export const categoriesData = {
   ],
 };
 
-export const data = {
-  category: {
-    products: [
-      {
-        category: "clothes",
-      },
-      {
-        category: "clothes",
-      },
-      {
-        category: "tech",
-      },
-      {
-        category: "tech",
-      },
-      {
-        category: "tech",
-      },
-      {
-        category: "tech",
-      },
-      {
-        category: "tech",
-      },
-      {
-        category: "tech",
-      },
-    ],
-  },
-};
-
 //currencies
 export const currencyData = {
   currencies: [
@@ -1436,3 +1405,376 @@ export const productData = {
     },
   ],
 };
+
+export const item = {
+  id: "apple-imac-2021",
+  name: "iMac 2021",
+  inStock: true,
+  gallery: [
+    "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/imac-24-blue-selection-hero-202104?wid=904&hei=840&fmt=jpeg&qlt=80&.v=1617492405000",
+  ],
+  description: "The new iMac!",
+  category: "tech",
+  attributes: [
+    {
+      id: "Capacity",
+      name: "Capacity",
+      type: "text",
+      items: [
+        {
+          displayValue: "256GB",
+          value: "256GB",
+          id: "256GB",
+        },
+        {
+          displayValue: "512GB",
+          value: "512GB",
+          id: "512GB",
+        },
+      ],
+    },
+    {
+      id: "With USB 3 ports",
+      name: "With USB 3 ports",
+      type: "text",
+      items: [
+        {
+          displayValue: "Yes",
+          value: "Yes",
+          id: "Yes",
+        },
+        {
+          displayValue: "No",
+          value: "No",
+          id: "No",
+        },
+      ],
+    },
+    {
+      id: "Touch ID in keyboard",
+      name: "Touch ID in keyboard",
+      type: "text",
+      items: [
+        {
+          displayValue: "Yes",
+          value: "Yes",
+          id: "Yes",
+        },
+        {
+          displayValue: "No",
+          value: "No",
+          id: "No",
+        },
+      ],
+    },
+  ],
+  prices: [
+    {
+      currency: {
+        label: "USD",
+        symbol: "$",
+      },
+      amount: 1688.03,
+    },
+    {
+      currency: {
+        label: "GBP",
+        symbol: "£",
+      },
+      amount: 1213.34,
+    },
+    {
+      currency: {
+        label: "AUD",
+        symbol: "A$",
+      },
+      amount: 2177.57,
+    },
+    {
+      currency: {
+        label: "JPY",
+        symbol: "¥",
+      },
+      amount: 182294.51,
+    },
+    {
+      currency: {
+        label: "RUB",
+        symbol: "₽",
+      },
+      amount: 127653.82,
+    },
+  ],
+  brand: "Apple",
+};
+
+export const cart = [
+  {
+    id: "huarache-x-stussy-le",
+    name: "Nike Air Huarache Le",
+    inStock: true,
+    gallery: [
+      "https://cdn.shopify.com/s/files/1/0087/6193/3920/products/DD1381200_DEOA_2_720x.jpg?v=1612816087",
+      "https://cdn.shopify.com/s/files/1/0087/6193/3920/products/DD1381200_DEOA_1_720x.jpg?v=1612816087",
+      "https://cdn.shopify.com/s/files/1/0087/6193/3920/products/DD1381200_DEOA_3_720x.jpg?v=1612816087",
+      "https://cdn.shopify.com/s/files/1/0087/6193/3920/products/DD1381200_DEOA_5_720x.jpg?v=1612816087",
+      "https://cdn.shopify.com/s/files/1/0087/6193/3920/products/DD1381200_DEOA_4_720x.jpg?v=1612816087",
+    ],
+    description: "<p>Great sneakers for everyday use!</p>",
+    category: "clothes",
+    attributes: [
+      {
+        id: "Size",
+        name: "Size",
+        type: "text",
+        items: [
+          {
+            displayValue: "40",
+            value: "40",
+            id: "40",
+          },
+          {
+            displayValue: "41",
+            value: "41",
+            id: "41",
+          },
+          {
+            displayValue: "42",
+            value: "42",
+            id: "42",
+          },
+          {
+            displayValue: "43",
+            value: "43",
+            id: "43",
+          },
+        ],
+      },
+    ],
+    prices: [
+      {
+        currency: {
+          label: "USD",
+          symbol: "$",
+        },
+        amount: 144.69,
+      },
+      {
+        currency: {
+          label: "GBP",
+          symbol: "£",
+        },
+        amount: 104,
+      },
+      {
+        currency: {
+          label: "AUD",
+          symbol: "A$",
+        },
+        amount: 186.65,
+      },
+      {
+        currency: {
+          label: "JPY",
+          symbol: "¥",
+        },
+        amount: 15625.24,
+      },
+      {
+        currency: {
+          label: "RUB",
+          symbol: "₽",
+        },
+        amount: 10941.76,
+      },
+    ],
+    brand: "Nike x Stussy",
+  },
+  {
+    id: "jacket-canada-goosee",
+    name: "Jacket",
+    inStock: true,
+    gallery: [
+      "https://images.canadagoose.com/image/upload/w_480,c_scale,f_auto,q_auto:best/v1576016105/product-image/2409L_61.jpg",
+      "https://images.canadagoose.com/image/upload/w_480,c_scale,f_auto,q_auto:best/v1576016107/product-image/2409L_61_a.jpg",
+      "https://images.canadagoose.com/image/upload/w_480,c_scale,f_auto,q_auto:best/v1576016108/product-image/2409L_61_b.jpg",
+      "https://images.canadagoose.com/image/upload/w_480,c_scale,f_auto,q_auto:best/v1576016109/product-image/2409L_61_c.jpg",
+      "https://images.canadagoose.com/image/upload/w_480,c_scale,f_auto,q_auto:best/v1576016110/product-image/2409L_61_d.jpg",
+      "https://images.canadagoose.com/image/upload/w_1333,c_scale,f_auto,q_auto:best/v1634058169/product-image/2409L_61_o.png",
+      "https://images.canadagoose.com/image/upload/w_1333,c_scale,f_auto,q_auto:best/v1634058159/product-image/2409L_61_p.png",
+    ],
+    description: "<p>Awesome winter jacket</p>",
+    category: "clothes",
+    attributes: [
+      {
+        id: "Size",
+        name: "Size",
+        type: "text",
+        items: [
+          {
+            displayValue: "Small",
+            value: "S",
+            id: "Small",
+          },
+          {
+            displayValue: "Medium",
+            value: "M",
+            id: "Medium",
+          },
+          {
+            displayValue: "Large",
+            value: "L",
+            id: "Large",
+          },
+          {
+            displayValue: "Extra Large",
+            value: "XL",
+            id: "Extra Large",
+          },
+        ],
+      },
+    ],
+    prices: [
+      {
+        currency: {
+          label: "USD",
+          symbol: "$",
+        },
+        amount: 518.47,
+      },
+      {
+        currency: {
+          label: "GBP",
+          symbol: "£",
+        },
+        amount: 372.67,
+      },
+      {
+        currency: {
+          label: "AUD",
+          symbol: "A$",
+        },
+        amount: 668.83,
+      },
+      {
+        currency: {
+          label: "JPY",
+          symbol: "¥",
+        },
+        amount: 55990.46,
+      },
+      {
+        currency: {
+          label: "RUB",
+          symbol: "₽",
+        },
+        amount: 39207.96,
+      },
+    ],
+    brand: "Canada Goose",
+  },
+  {
+    id: "ps-5",
+    name: "PlayStation 5",
+    inStock: false,
+    gallery: [
+      "https://images-na.ssl-images-amazon.com/images/I/510VSJ9mWDL._SL1262_.jpg",
+      "https://images-na.ssl-images-amazon.com/images/I/610%2B69ZsKCL._SL1500_.jpg",
+      "https://images-na.ssl-images-amazon.com/images/I/51iPoFwQT3L._SL1230_.jpg",
+      "https://images-na.ssl-images-amazon.com/images/I/61qbqFcvoNL._SL1500_.jpg",
+      "https://images-na.ssl-images-amazon.com/images/I/51HCjA3rqYL._SL1230_.jpg",
+    ],
+    description:
+      "<p>A good gaming console. Plays games of PS4! Enjoy if you can buy it mwahahahaha</p>",
+    category: "tech",
+    attributes: [
+      {
+        id: "Color",
+        name: "Color",
+        type: "swatch",
+        items: [
+          {
+            displayValue: "Green",
+            value: "#44FF03",
+            id: "Green",
+          },
+          {
+            displayValue: "Cyan",
+            value: "#03FFF7",
+            id: "Cyan",
+          },
+          {
+            displayValue: "Blue",
+            value: "#030BFF",
+            id: "Blue",
+          },
+          {
+            displayValue: "Black",
+            value: "#000000",
+            id: "Black",
+          },
+          {
+            displayValue: "White",
+            value: "#FFFFFF",
+            id: "White",
+          },
+        ],
+      },
+      {
+        id: "Capacity",
+        name: "Capacity",
+        type: "text",
+        items: [
+          {
+            displayValue: "512G",
+            value: "512G",
+            id: "512G",
+          },
+          {
+            displayValue: "1T",
+            value: "1T",
+            id: "1T",
+          },
+        ],
+      },
+    ],
+    prices: [
+      {
+        currency: {
+          label: "USD",
+          symbol: "$",
+        },
+        amount: 844.02,
+      },
+      {
+        currency: {
+          label: "GBP",
+          symbol: "£",
+        },
+        amount: 606.67,
+      },
+      {
+        currency: {
+          label: "AUD",
+          symbol: "A$",
+        },
+        amount: 1088.79,
+      },
+      {
+        currency: {
+          label: "JPY",
+          symbol: "¥",
+        },
+        amount: 91147.25,
+      },
+      {
+        currency: {
+          label: "RUB",
+          symbol: "₽",
+        },
+        amount: 63826.91,
+      },
+    ],
+    brand: "Sony",
+  },
+];

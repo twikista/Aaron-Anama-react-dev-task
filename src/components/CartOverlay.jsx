@@ -1,5 +1,6 @@
 import { Component } from "react";
 import styled from "styled-components";
+import Minicart from "./Minicart";
 
 const Overlay = styled.section`
     position: absolute;
@@ -8,13 +9,15 @@ const Overlay = styled.section`
     bottom: 0;
     right: 0;
     background: rgba(57, 55, 72, 0.22);
-    display: none;
+    /* display: none; */
 `
 
 class CartOverlay extends Component{
     render(){
         return(
-            <Overlay>hello</Overlay>
+            <Overlay>
+                <Minicart/>
+            </Overlay>
         )
     }
 }

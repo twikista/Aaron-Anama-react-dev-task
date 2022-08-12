@@ -33,7 +33,7 @@ const ProductImage = styled.div`
     box-sizing: border-box;
     background-color: #C4C4C4;
     background-image: url(${props => props.url});
-    /* background-position: center; */
+    background-position: 50% 0;
     background-size:cover;
     background-repeat: no-repeat;
     object-fit: contain;
