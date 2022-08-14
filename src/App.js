@@ -1,5 +1,6 @@
 import Header from "./components/Header";
 import Main from "./components/Main";
+import Product from "./components/Product";
 import Products from "./components/Products";
 
 function App() {
@@ -7,7 +8,8 @@ function App() {
     <div className="App">
       <Header />
       <Main>
-        <Products />
+        {/* <Products /> */}
+        <Product />
       </Main>
     </div>
   );

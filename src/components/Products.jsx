@@ -5,17 +5,15 @@ import {productData} from '../data';
 import CartOverlay from "./CartOverlay";
 
 const LandingPage = styled.div`
-    width: calc(100% - 100px);
-    max-width: 1220px;
-    margin: 0 auto;
-    min-height: 100vh;
+    width:100%;
+    
 `
 const ActiveCategory = styled.h2`
     font-size: 42px;
     font-weight: 400;
     color: #1D1F22;
     line-height: 1.6;
-    padding-top: 80px;
+    /* padding-top: 80px; */
 `
 
 const ProductsWarpper = styled.section`

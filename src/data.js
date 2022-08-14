@@ -1407,63 +1407,66 @@ export const productData = {
 };
 
 export const item = {
-  id: "apple-imac-2021",
-  name: "iMac 2021",
-  inStock: true,
+  id: "xbox-series-s",
+  name: "Xbox Series S 512GB",
+  inStock: false,
   gallery: [
-    "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/imac-24-blue-selection-hero-202104?wid=904&hei=840&fmt=jpeg&qlt=80&.v=1617492405000",
+    "https://images-na.ssl-images-amazon.com/images/I/71vPCX0bS-L._SL1500_.jpg",
+    "https://images-na.ssl-images-amazon.com/images/I/71q7JTbRTpL._SL1500_.jpg",
+    "https://images-na.ssl-images-amazon.com/images/I/71iQ4HGHtsL._SL1500_.jpg",
+    "https://images-na.ssl-images-amazon.com/images/I/61IYrCrBzxL._SL1500_.jpg",
+    "https://images-na.ssl-images-amazon.com/images/I/61RnXmpAmIL._SL1500_.jpg",
   ],
-  description: "The new iMac!",
+  description:
+    "\n<div>\n    <ul>\n        <li><span>Hardware-beschleunigtes Raytracing macht dein Spiel noch realistischer</span></li>\n        <li><span>Spiele Games mit bis zu 120 Bilder pro Sekunde</span></li>\n        <li><span>Minimiere Ladezeiten mit einer speziell entwickelten 512GB NVMe SSD und wechsle mit Quick Resume nahtlos zwischen mehreren Spielen.</span></li>\n        <li><span>Xbox Smart Delivery stellt sicher, dass du die beste Version deines Spiels spielst, egal, auf welcher Konsole du spielst</span></li>\n        <li><span>Spiele deine Xbox One-Spiele auf deiner Xbox Series S weiter. Deine Fortschritte, Erfolge und Freundesliste werden automatisch auf das neue System übertragen.</span></li>\n        <li><span>Erwecke deine Spiele und Filme mit innovativem 3D Raumklang zum Leben</span></li>\n        <li><span>Der brandneue Xbox Wireless Controller zeichnet sich durch höchste Präzision, eine neue Share-Taste und verbesserte Ergonomie aus</span></li>\n        <li><span>Ultra-niedrige Latenz verbessert die Reaktionszeit von Controller zum Fernseher</span></li>\n        <li><span>Verwende dein Xbox One-Gaming-Zubehör -einschließlich Controller, Headsets und mehr</span></li>\n        <li><span>Erweitere deinen Speicher mit der Seagate 1 TB-Erweiterungskarte für Xbox Series X (separat erhältlich) und streame 4K-Videos von Disney+, Netflix, Amazon, Microsoft Movies &amp; TV und mehr</span></li>\n    </ul>\n</div>",
   category: "tech",
   attributes: [
+    {
+      id: "Color",
+      name: "Color",
+      type: "swatch",
+      items: [
+        {
+          displayValue: "Green",
+          value: "#44FF03",
+          id: "Green",
+        },
+        {
+          displayValue: "Cyan",
+          value: "#03FFF7",
+          id: "Cyan",
+        },
+        {
+          displayValue: "Blue",
+          value: "#030BFF",
+          id: "Blue",
+        },
+        {
+          displayValue: "Black",
+          value: "#000000",
+          id: "Black",
+        },
+        {
+          displayValue: "White",
+          value: "#FFFFFF",
+          id: "White",
+        },
+      ],
+    },
     {
       id: "Capacity",
       name: "Capacity",
       type: "text",
       items: [
         {
-          displayValue: "256GB",
-          value: "256GB",
-          id: "256GB",
+          displayValue: "512G",
+          value: "512G",
+          id: "512G",
         },
         {
-          displayValue: "512GB",
-          value: "512GB",
-          id: "512GB",
-        },
-      ],
-    },
-    {
-      id: "With USB 3 ports",
-      name: "With USB 3 ports",
-      type: "text",
-      items: [
-        {
-          displayValue: "Yes",
-          value: "Yes",
-          id: "Yes",
-        },
-        {
-          displayValue: "No",
-          value: "No",
-          id: "No",
-        },
-      ],
-    },
-    {
-      id: "Touch ID in keyboard",
-      name: "Touch ID in keyboard",
-      type: "text",
-      items: [
-        {
-          displayValue: "Yes",
-          value: "Yes",
-          id: "Yes",
-        },
-        {
-          displayValue: "No",
-          value: "No",
-          id: "No",
+          displayValue: "1T",
+          value: "1T",
+          id: "1T",
         },
       ],
     },
@@ -1474,40 +1477,39 @@ export const item = {
         label: "USD",
         symbol: "$",
       },
-      amount: 1688.03,
+      amount: 333.99,
     },
     {
       currency: {
         label: "GBP",
         symbol: "£",
       },
-      amount: 1213.34,
+      amount: 240.07,
     },
     {
       currency: {
         label: "AUD",
         symbol: "A$",
       },
-      amount: 2177.57,
+      amount: 430.85,
     },
     {
       currency: {
         label: "JPY",
         symbol: "¥",
       },
-      amount: 182294.51,
+      amount: 36068.27,
     },
     {
       currency: {
         label: "RUB",
         symbol: "₽",
       },
-      amount: 127653.82,
+      amount: 25257.22,
     },
   ],
-  brand: "Apple",
+  brand: "Microsoft",
 };
-
 export const cart = [
   {
     id: "huarache-x-stussy-le",

@@ -3,7 +3,7 @@ import styled from "styled-components";
 // import {item} from '../data';
 import plusIcon from '../assets/plus-square.svg';
 import minusIcon from '../assets/minus-square.svg';
-import ProductAttribute from "./ProductAtrributes";
+import ProductAttributes from "./ProductAtrributes";
 
 // const {gallery, prices, attributes} = item;
 
@@ -108,7 +108,7 @@ class MiniCartItem extends Component{
                             <CartItemName>{`${brand} ${name}`}</CartItemName>
                             <CartItemPrice>{prices[0].currency.symbol}{prices[0].amount}</CartItemPrice>
                         </CartItemBasicDetails>
-                        <ProductAttribute attributes = {item.attributes}/> 
+                        <ProductAttributes attributes = {item.attributes}/> 
                     </CartItemDetails>
                     
                     <CartItemcontrols>
