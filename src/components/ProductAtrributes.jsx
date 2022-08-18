@@ -1,5 +1,6 @@
 import { Component } from "react";
 import styled from "styled-components";
+import { item } from "../data";
 import ProductAttribute from "./ProductAttribute";
 
 const AtributeContainer = styled.article`
@@ -12,36 +13,42 @@ const AtributeContainer = styled.article`
 `;
 
 class ProductAttributes extends Component {
-  state = { color: "" };
+  state = {};
+
+  itemsHandler = (attribute, index) => {
+    const data = [...this.state];
+    data[index] = attribute;
+    this.setState((prevState) => [...prevState, ...data]);
+    this.props.updateAttributeHandler(this.state.attributes);
+  };
 
   render() {
-    console.log(this.state);
-    const { attributes } = this.props;
-    const styles = {
-      attributeTitle: {
-        fontweight: "400",
-        fontSize: "14px",
-        lineHeight: "1.46",
-        fontFamily: "Raleway",
-      },
-      attributes: {
-        colorHeight: "20px",
-        height: "24px",
-      },
-      attributeValue: {
-        fontWeight: "400",
-        fontSize: "14px",
-        lineHeight: "1.6",
-        color: "#1d1f22",
-      },
-      colorAttributeValue: {
-        width: "20px",
-      },
-    };
+    const { attributes, styles } = this.props;
+    console.log(attributes);
+    // const styles = {
+    //   attributeTitle: {
+    //     fontweight: "400",
+    //     fontSize: "14px",
+    //     lineHeight: "1.46",
+    //     fontFamily: "Raleway",
+    //   },
+    //   attributes: {
+    //     colorHeight: "20px",
+    //     height: "24px",
+    //   },
+    //   attributeValue: {
+    //     fontWeight: "400",
+    //     fontSize: "14px",
+    //     lineHeight: "1.6",
+    //     color: "#1d1f22",
+    //   },
+    //   colorAttributeValue: {
+    //     width: "20px",
+    //   },
+    // };
     return (
       <AtributeContainer>
-        {attributes.map((attribute) => {
-          console.log(attribute);
+        {attributes.map((attribute, index) => {
           return (
             <ProductAttribute
               key={attribute.id}
@@ -49,6 +56,7 @@ class ProductAttributes extends Component {
               width="120px"
               styles={styles}
               {...this.props}
+              // itemsHandler={this.itemsHandler}
             />
             // <AttributeWrapper key={id}>
             //     <AttributeTitle>{name}</AttributeTitle>

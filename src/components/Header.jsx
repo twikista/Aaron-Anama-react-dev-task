@@ -1,18 +1,14 @@
 import { Component } from "react";
 import Categories from "./Categories";
 import CurrencySelector from "./CurrencySelector";
-import Cart from "./Cart";
+import CartBadge from "./CartBadge";
 import styled from "styled-components";
 import logo from "../assets/logo.png";
 
-
-
-
-;
 const AppHeader = styled.header`
-width: 100%;
-height: 80px;
-`
+  width: 100%;
+  height: 80px;
+`;
 
 const HeaderWrapper = styled.div`
   width: 90%;
@@ -50,21 +46,22 @@ const Action = styled.div`
   margin-right: 13px;
 `;
 
-
 class Header extends Component {
   render() {
     return (
       <AppHeader>
         <HeaderWrapper>
           <NavWrapper>
-            <Categories/>
+            <Categories />
           </NavWrapper>
           <LogoContainer>
             <Logo src={logo} />
           </LogoContainer>
           <Action>
-            <CurrencySelector/>
-            <Cart/>
+            <CurrencySelector
+              getSelectedCurrency={this.props.getSelectedCurrency}
+            />
+            <CartBadge />
           </Action>
         </HeaderWrapper>
       </AppHeader>

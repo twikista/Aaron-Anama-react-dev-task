@@ -18,7 +18,8 @@ const CategoryLink = styled.button`
     margin-left: 20px;
   }
 
-  &:hover {
+  &:hover,
+  &.active {
     color: #5ece7b;
     font-weight: 600;
     font-size: 16px;
@@ -26,15 +27,18 @@ const CategoryLink = styled.button`
   }
 `;
 
-
-class Category extends Component{
-    render(){
-      
-      const {category} = this.props
-        return(
-          <CategoryLink as="a" href="#">{category}</CategoryLink>
-        )
-    }
+class Category extends Component {
+  state = { activeCategory: this.props.defaultCategory };
+  render() {
+    console.log(this.state);
+    const { category } = this.props;
+    console.log(category);
+    return (
+      <CategoryLink as="a" href="#">
+        {category}
+      </CategoryLink>
+    );
+  }
 }
 
-export default Category
+export default Category;

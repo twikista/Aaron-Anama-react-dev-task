@@ -12,15 +12,21 @@ const Nav = styled.nav`
 `;
 
 class Categories extends Component {
-
   render() {
-    const categories = categoriesData.categories.map((category) => category.name);
+    const { categories } = categoriesData;
+    console.log(categories);
     return (
       <Nav>
-      {categories.map((i, index)=>{
-      return <Category key={index} category={i}/>
-      
-      })} 
+        {categories.map((i, index) => {
+          return (
+            <Category
+              key={index}
+              category={i.name}
+              const
+              defaultCategory={categories[0].name}
+            />
+          );
+        })}
       </Nav>
     );
   }

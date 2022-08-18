@@ -2,8 +2,11 @@ import { Component } from "react";
 import styled from "styled-components";
 import { item } from "../data";
 import uniqid from "uniqid";
-import ProductAttribute from "./ProductAtrributes";
+import ProductAttributes from "./ProductAtrributes";
+import ProductName from "./ProductName";
+import Price from "./Price";
 import parse from "html-react-parser";
+import { queryAllByPlaceholderText } from "@testing-library/react";
 
 const Container = styled.section`
   display: grid;
@@ -52,19 +55,19 @@ const ProductNameWrapper = styled.div`
   margin-bottom: 43px;
 `;
 
-const ProductNameSpan = styled.span`
-  font-weight: 600;
-  padding-bottom: 16px;
-  display: inline-block;
-`;
+// const ProductNameSpan = styled.span`
+//   font-weight: 600;
+//   padding-bottom: 16px;
+//   display: inline-block;
+// `;
 
-const ProductName = styled.h2`
-  font-family: "Raleway";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 30px;
-  line-height: 27px;
-`;
+// const ProductName = styled.h2`
+//   font-family: "Raleway";
+//   font-style: normal;
+//   font-weight: 400;
+//   font-size: 30px;
+//   line-height: 27px;
+// `;
 
 const ProductDetails = styled.article`
   width: 292px;
@@ -89,11 +92,11 @@ const ProductpriceLabel = styled.h5`
   text-transform: uppercase;
 `;
 
-const ProductPrice = styled.p`
-  font-weight: 700;
-  font-size: 24px;
-  line-height: 18px;
-`;
+// const ProductPrice = styled.p`
+//   font-weight: 700;
+//   font-size: 24px;
+//   line-height: 18px;
+// `;
 
 const AddToCartButton = styled.button`
   display: flex;
@@ -112,6 +115,7 @@ const AddToCartButton = styled.button`
   font-size: 16px;
   line-height: 120%;
   color: #ffffff;
+  cursor: pointer;
 `;
 
 const ProductDesriptionWrapper = styled.div`
@@ -136,6 +140,9 @@ const ProductDescription = styled.p`
 `;
 
 const styles = {
+  attributeWrapper: {
+    width: "279px",
+  },
   attributeTitle: {
     fontweight: "700",
     fontSize: "18px",
@@ -160,14 +167,27 @@ const styles = {
 class Product extends Component {
   state = {
     imageUrl: item.gallery[0],
+    selectedAttributes: {},
   };
 
   imageToggler = (url) => {
-    this.setState({ imageUrl: url });
+    this.setState((prevState) => {
+      return { ...prevState, imageUrl: url };
+    });
   };
+
+  selectedAttributesHandler = (attribute) => {
+    this.setState((prevState) => {
+      return {
+        ...prevState,
+        selectedAttributes: { ...prevState.selectedAttributes, ...attribute },
+      };
+    });
+  };
+
   render() {
+    console.log(this.state);
     const { gallery } = item;
-    console.log(item);
     return (
       <Container>
         <ImageThumbNails>
@@ -185,21 +205,36 @@ class Product extends Component {
             <ProductImage src={this.state.imageUrl} alt={item.name} />
           </ImageWrapper>
           <ProductDetails>
-            <ProductNameWrapper>
-              <ProductName>
-                <ProductNameSpan>{item.brand}</ProductNameSpan>
-                {item.name}
-              </ProductName>
-            </ProductNameWrapper>
-            <ProductAttribute
+            <ProductName
+              fontFamily="Raleway"
+              fontWeight="400"
+              fontSize="30px"
+              lineHeight="27px"
+              color="#1d1f22"
+              marginBottom="43px"
+              spanFontWeight="600"
+              spanMarginBottom="16px"
+              item={item}
+              {...this.props}
+            />
+            <ProductAttributes
               attributes={item.attributes}
               styles={styles}
               width="292px"
               uppercase="uppercase"
+              selectedAttributesHandler={this.selectedAttributesHandler}
+              {...this.props}
             />
             <ProductPriceWrapper>
               <ProductpriceLabel>price</ProductpriceLabel>
-              <ProductPrice>$50.00</ProductPrice>
+              {/* <ProductPrice>$50.00</ProductPrice> */}
+              <Price
+                prices={item.prices}
+                currentCurrency={this.props.currentCurrency}
+                fontWeight="700"
+                fontSize="24px"
+                lineHeight="18px"
+              />
             </ProductPriceWrapper>
             <AddToCartButton>add to cart</AddToCartButton>
             <ProductDesriptionWrapper>

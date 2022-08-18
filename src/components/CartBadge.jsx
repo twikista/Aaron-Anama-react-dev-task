@@ -35,15 +35,15 @@ const CartAmout = styled.span`
   left: 13px;
 `;
 
-class Cart extends Component{
-    render(){
-        return(
-            <CartWrapper>
-              <CartImage src={emptyCart} />
-              <CartAmout>3</CartAmout>
-            </CartWrapper>
-        )
-    }
+class CartBadge extends Component {
+  render() {
+    return (
+      <CartWrapper>
+        <CartImage src={emptyCart} />
+        <CartAmout>3</CartAmout>
+      </CartWrapper>
+    );
+  }
 }
 
-export default Cart
+export default CartBadge;

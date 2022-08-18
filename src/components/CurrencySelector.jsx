@@ -1,9 +1,9 @@
 import { Component } from "react";
 import styled from "styled-components";
-import {currencyData} from '../data';
+import { currencyData } from "../data";
 import selectArrowDown from "../assets/select_arrow_down.svg";
 import selectArrowUp from "../assets/select_arrow_up.svg";
-import uniqid from 'uniqid'
+import uniqid from "uniqid";
 
 const CurrencyOptionsWrapper = styled.div`
   background-image: url(${selectArrowDown});
@@ -12,6 +12,10 @@ const CurrencyOptionsWrapper = styled.div`
   background-repeat: no-repeat;
   position: relative;
   &:focus-within {
+    background-image: url(${selectArrowUp});
+  }
+
+  &:active {
     background-image: url(${selectArrowUp});
   }
 `;
@@ -30,18 +34,17 @@ const SelectCurrency = styled.select`
   text-transform: uppercase;
   width: 10px;
   opacity: 0;
-  
 `;
 const CurrencyOptions = styled.option`
   background-color: white;
-  color: #1D1F22;
+  color: #1d1f22;
   box-shadow: (0px 4px 35px rgba(168, 172, 176, 0.19));
   &[value=""][disabled] {
     display: none;
   }
 
-  & Laa{
-    background-color: #EEEEEE;
+  & Laa {
+    background-color: #eeeeee;
   }
 `;
 const Label = styled.label`
@@ -52,40 +55,58 @@ const Label = styled.label`
   justify-content: center;
 `;
 
+class CurrencySelector extends Component {
+  state = {
+    label: "",
+    symbol: "",
+  };
 
-class CurrencySelector extends Component{
-    state={
-        label:'',
-    }
+  onChangeHandler = (e) => {
+    const { name, value } = e.target;
+    const { currencies } = currencyData;
+    const currency = currencies.find((i) => i.label === value);
+    this.setState({ [name]: value, symbol: currency.symbol });
+  };
 
-    onChangeHandler=(e)=>{
-        const {name, value}= e.target;
-        this.setState({[name]:value})
-        console.log(name)
-       
-        
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.label !== this.state.label) {
+      this.props.getSelectedCurrency(this.state);
     }
+  }
 
-    render(){
-        
-        const {currencies} = currencyData
-        const [renderedSymbol] = currencies.filter(i=>i.label===this.state.label?i:null)
-        return(
-        
-            <Label htmlFor="currency">
-              {renderedSymbol?renderedSymbol.symbol:"$"}
-              <CurrencyOptionsWrapper >
-                <SelectCurrency id="currency" name="label" value="" onChange={this.onChangeHandler}>
-                  <CurrencyOptions value="" name = "label" disabled></CurrencyOptions>
-                  {currencies.map(currency=>{
-                    return <CurrencyOptions key={uniqid()} name="label" value={currency.label}>{currency.symbol}{currency.label}</CurrencyOptions>
-                  })}
-                  
-                </SelectCurrency>
-              </CurrencyOptionsWrapper>
-            </Label>
-        )
-    }
+  render() {
+    const { currencies } = currencyData;
+    const [renderedSymbol] = currencies.filter((i) =>
+      i.label === this.state.label ? i : null
+    );
+    return (
+      <Label htmlFor="currency">
+        {renderedSymbol ? renderedSymbol.symbol : "$"}
+        <CurrencyOptionsWrapper>
+          <SelectCurrency
+            id="currency"
+            name="label"
+            value={this.state.label}
+            onChange={this.onChangeHandler}
+          >
+            <CurrencyOptions value="" name="label" disabled></CurrencyOptions>
+            {currencies.map((currency) => {
+              return (
+                <CurrencyOptions
+                  key={uniqid()}
+                  name="label"
+                  value={currency.label}
+                >
+                  {currency.symbol}
+                  {currency.label}
+                </CurrencyOptions>
+              );
+            })}
+          </SelectCurrency>
+        </CurrencyOptionsWrapper>
+      </Label>
+    );
+  }
 }
 
-export default CurrencySelector
+export default CurrencySelector;

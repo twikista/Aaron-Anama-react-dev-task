@@ -1,23 +1,23 @@
 import { Component } from "react";
 import styled from "styled-components";
-import MiniCartItem from "./MiniCartItem";
+import MainCartItem from "./MainCartItem";
 import { cart } from "../data";
 
 const CartItemsContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 40px;
-  width: 293px;
-  max-height: 420px;
-  overflow: hidden scroll;
+  align-items: center;
+  width: 100%;
+  margin-top: 55px;
 `;
 
-class MinicartItems extends Component {
+class MainCartItems extends Component {
   render() {
+    const { gap, width, maxHeight } = this.props;
     return (
-      <CartItemsContainer>
+      <CartItemsContainer gap={gap} width={width} maxHeight={maxHeight}>
         {cart.map((item) => (
-          <MiniCartItem
+          <MainCartItem
             key={item.id}
             item={item}
             currentCurrency={this.props.currentCurrency}
@@ -28,4 +28,4 @@ class MinicartItems extends Component {
   }
 }
 
-export default MinicartItems;
+export default MainCartItems;

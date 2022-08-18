@@ -1,4 +1,4 @@
-import { Component } from "react";
+import React, { Component } from "react";
 import styled from "styled-components";
 
 const AttributeWrapper = styled.div`
@@ -30,7 +30,7 @@ const Attributes = styled.div`
     props.height ? `${props.height}` : `${props.colorHeight}`};
 `;
 
-const AttributeValue = styled.label`
+const AttributeValue = styled.button`
   flex: 1;
   /* max-height: ${(props) => props.width}; */
   width: 100%;
@@ -45,10 +45,16 @@ const AttributeValue = styled.label`
   justify-content: center;
   color: ${(props) => props.color};
   border: 1px solid #1d1f22;
-  background-color: ${(props) => props.value};
-
+  background-color: transparent;
   flex-wrap: wrap;
   cursor: pointer;
+  appearance: none;
+  /* border: 1px solid ${(props) => props.border}; */
+
+  &.active {
+    background-color: #1d1f22;
+    color: #fff;
+  }
 `;
 
 const ColorAttributeValue = styled(AttributeValue)`
@@ -56,17 +62,50 @@ const ColorAttributeValue = styled(AttributeValue)`
   height: 100%;
   width: ${(props) => props.width};
   border: ${(props) => props.border} solid #ababab;
+  background-color: ${(props) => props.value};
+  &.active {
+    outline: solid 1px #5ece7b;
+    outline-offset: 1px;
+    background-color: ${(props) => props.value};
+  }
+`;
+
+const AttributeRadioButton = styled.input`
+  &:checked {
+    display: none;
+  }
 `;
 
 class ProductAttribute extends Component {
+  initialState = this.props.selectedAttributes
+    ? this.props.selectedAttributes
+    : {};
+  state = this.initialState;
+  changeHandler = (e) => {
+    const { name, value } = e.target;
+    this.setState({ ...this.state, [name]: value });
+    // this.props.selectedAttributesHandler(this.state);
+  };
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState !== this.state) {
+      // this.props.attributesHandler(this.state);
+      this.props.selectedAttributesHandler(this.state);
+    }
+  }
   render() {
-    console.log(this.props);
+    console.log(this.state, this.initialState);
+
     const { name, type, items, width, styles } = this.props;
-    const { attributeTitle, attributes, attributeValue, colorAttributeValue } =
-      styles;
-    console.log(items);
+    const {
+      attributeTitle,
+      attributes,
+      attributeValue,
+      colorAttributeValue,
+      attributeWrapper,
+    } = styles;
     return (
-      <AttributeWrapper width={width}>
+      <AttributeWrapper width={attributeWrapper.width}>
         <AttributeTitle
           fontWeight={attributeTitle.fontWeight}
           lineHeight={attributeTitle.lineHeight}
@@ -86,25 +125,48 @@ class ProductAttribute extends Component {
                   value={`${value}`}
                   width={colorAttributeValue.width}
                   border={`${borderSize}`}
-                  onClick={() => this.setState({ color: `${value}` })}
-                />
+                  htmlFor={id}
+                  onClick={() => this.setState({ [name]: displayValue })}
+                  className={displayValue === this.state[name] ? "active" : ""}
+                  disabled={this.props.disable ? true : false}
+                >
+                  {/* <AttributeRadioButton
+                    type="radio"
+                    id={id}
+                    name={name}
+                    value={displayValue}
+                    checked={displayValue === this.state[name]}
+                    onChange={this.changeHandler}
+                  /> */}
+                </ColorAttributeValue>
               );
             })}
           </Attributes>
         ) : (
           <Attributes height={attributes.height}>
-            {items.map(({ id, value }) => {
+            {items.map(({ id, value, displayValue }) => {
               return (
                 <AttributeValue
                   key={id}
                   width="20px"
-                  onClick={() => this.setState({ color: `${value}` })}
                   fontWeight={attributeValue.fontWeight}
                   lineHeight={attributeValue.lineHeight}
                   fontSize={attributeValue.fontSize}
                   color={attributeValue.color}
+                  htmlFor={id}
+                  className={displayValue === this.state[name] ? "active" : ""}
+                  onClick={() => this.setState({ [name]: displayValue })}
+                  disabled={this.props.disable ? true : false}
                 >
                   {value}
+                  {/* <AttributeRadioButton
+                    type="radio"
+                    id={id}
+                    name={name}
+                    value={displayValue}
+                    checked={displayValue === this.state[name]}
+                    onChange={this.changeHandler}
+                  /> */}
                 </AttributeValue>
               );
             })}
