@@ -2,6 +2,8 @@ import { Component } from "react";
 import styled from "styled-components";
 import Price from "./Price";
 import addAproductIcon from "../assets/add_product_icon.svg";
+import withRouter from "./NavParamsHOC";
+import { Link } from "react-router-dom";
 
 const CardWrapper = styled.article`
   width: calc(386px - 20px);
@@ -84,11 +86,18 @@ const OutOfStockOverlay = styled(CardWrapper)`
 
 class ProductCard extends Component {
   render() {
+    console.log(this.props);
     const { name, inStock, gallery, prices } = this.props;
+    const activeCategory = this.props.activeCategory;
+    console.log(activeCategory);
     return (
       <CardWrapper>
         <ProductImage url={`${gallery[0]}`}>
-          {inStock && <AddToCardIcon src={`${addAproductIcon}`} />}
+          {inStock && (
+            <Link to={`/${activeCategory}/${this.props.id}}`}>
+              <AddToCardIcon src={`${addAproductIcon}`} />
+            </Link>
+          )}
         </ProductImage>
         <CardContent>
           <ProductName>{name}</ProductName>
@@ -107,4 +116,4 @@ class ProductCard extends Component {
   }
 }
 
-export default ProductCard;
+export default withRouter(ProductCard);

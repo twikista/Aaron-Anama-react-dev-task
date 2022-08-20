@@ -6,7 +6,8 @@ import ProductAttributes from "./ProductAtrributes";
 import ProductName from "./ProductName";
 import Price from "./Price";
 import parse from "html-react-parser";
-import { queryAllByPlaceholderText } from "@testing-library/react";
+// import withRouter from "./NavParamsHOC";
+// import { Link } from "react-router-dom";
 
 const Container = styled.section`
   display: grid;
@@ -185,8 +186,13 @@ class Product extends Component {
     });
   };
 
+  componentDidMount() {
+    console.log(this.props.params);
+  }
+
   render() {
-    console.log(this.state);
+    console.log(this.props, this.state);
+
     const { gallery } = item;
     return (
       <Container>

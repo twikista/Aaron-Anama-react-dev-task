@@ -61,7 +61,7 @@ class Header extends Component {
             <CurrencySelector
               getSelectedCurrency={this.props.getSelectedCurrency}
             />
-            <CartBadge />
+            <CartBadge {...this.props} />
           </Action>
         </HeaderWrapper>
       </AppHeader>

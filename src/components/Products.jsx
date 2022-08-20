@@ -1,8 +1,11 @@
 import { Component } from "react";
 import styled from "styled-components";
 import ProductCard from "./ProductCard";
-import { productData } from "../data";
 import CartOverlay from "./CartOverlay";
+import withRouter from "./NavParamsHOC";
+import { Link, Outlet } from "react-router-dom";
+import { Get_CATEGORY } from "../queries/queries";
+import { Query } from "@apollo/client/react/components";
 
 const LandingPage = styled.div`
   width: 100%;
@@ -30,25 +33,58 @@ const ProductsWarpper = styled.section`
 `;
 
 class Products extends Component {
+  // state = { activeCategory: "all" };
+  // componentDidUpdate(prevProps, prevState) {
+  //   if(prevState !== this.state){
+
+  //   }
+  //   console.log(this.props);
+  //   //this.setState({ activeCategory: params });
+  // }
   render() {
-    const categories = productData.categories;
-    const { products } = categories.find((category) => category.name === "all");
+    console.log(this.props.params);
+    const params = this.props.params;
+    console.log(params);
+    console.log();
+    const title = Object.keys(params).length ? params.category : "all";
+    console.log(title);
+
+    // const categories = productData.categories;
+    // const { products } = categories.find((category) => category.name === "all");
     return (
-      <LandingPage>
-        <ActiveCategory>{categories[0].name.toUpperCase()}</ActiveCategory>
-        <ProductsWarpper>
-          {products.map((product) => (
-            <ProductCard
-              key={product.id}
-              {...product}
-              currentCurrency={this.props.currentCurrency}
-            />
-          ))}
-        </ProductsWarpper>
-        <CartOverlay currentCurrency={this.props.currentCurrency} />
-      </LandingPage>
+      <>
+        {
+          <Query query={Get_CATEGORY} variables={{ title }}>
+            {({ loading, error, data }) => {
+              if (loading) return <p>loading...</p>;
+              if (error) console.log(error);
+
+              return (
+                <LandingPage>
+                  <ActiveCategory>{title.toUpperCase()}</ActiveCategory>
+                  <ProductsWarpper>
+                    {data &&
+                      data.category.products.map((product) => (
+                        <ProductCard
+                          key={product.id}
+                          {...product}
+                          currentCurrency={this.props.currentCurrency}
+                          activeCategory={title}
+                        />
+                      ))}
+                  </ProductsWarpper>
+                  <CartOverlay
+                    currentCurrency={this.props.currentCurrency}
+                    isOpen={this.props.isOpen}
+                  />
+                </LandingPage>
+              );
+            }}
+          </Query>
+        }
+      </>
     );
   }
 }
 
-export default Products;
+export default withRouter(Products);

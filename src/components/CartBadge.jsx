@@ -9,6 +9,7 @@ const CartWrapper = styled.button`
   margin-left: 22px;
   position: relative;
   display: flex;
+  cursor: pointer;
 `;
 
 const CartImage = styled.img`
@@ -36,9 +37,22 @@ const CartAmout = styled.span`
 `;
 
 class CartBadge extends Component {
+  state = { open: false };
+  handler = () => {
+    this.setState((prevState) => {
+      return { open: !prevState.open };
+    });
+  };
+
+  componentDidUpdate(prevprops, prevState) {
+    if (prevState !== this.state) {
+      this.props.overLaytoggle(this.state.open);
+    }
+  }
   render() {
+    console.log(this.state);
     return (
-      <CartWrapper>
+      <CartWrapper onClick={this.handler}>
         <CartImage src={emptyCart} />
         <CartAmout>3</CartAmout>
       </CartWrapper>

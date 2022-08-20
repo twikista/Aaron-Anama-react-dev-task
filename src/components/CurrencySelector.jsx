@@ -4,6 +4,9 @@ import { currencyData } from "../data";
 import selectArrowDown from "../assets/select_arrow_down.svg";
 import selectArrowUp from "../assets/select_arrow_up.svg";
 import uniqid from "uniqid";
+import { Query } from "@apollo/client/react/components";
+import { gql } from "@apollo/client";
+import { GET_CURRENCIES } from "../queries/queries";
 
 const CurrencyOptionsWrapper = styled.div`
   background-image: url(${selectArrowDown});
@@ -11,7 +14,9 @@ const CurrencyOptionsWrapper = styled.div`
   background-position: 50% 60%;
   background-repeat: no-repeat;
   position: relative;
-  &:focus-within {
+
+  &:focus-within,
+  &:hover {
     background-image: url(${selectArrowUp});
   }
 
@@ -34,6 +39,7 @@ const SelectCurrency = styled.select`
   text-transform: uppercase;
   width: 10px;
   opacity: 0;
+  cursor: pointer;
 `;
 const CurrencyOptions = styled.option`
   background-color: white;
@@ -75,37 +81,58 @@ class CurrencySelector extends Component {
   }
 
   render() {
-    const { currencies } = currencyData;
-    const [renderedSymbol] = currencies.filter((i) =>
-      i.label === this.state.label ? i : null
-    );
     return (
-      <Label htmlFor="currency">
-        {renderedSymbol ? renderedSymbol.symbol : "$"}
-        <CurrencyOptionsWrapper>
-          <SelectCurrency
-            id="currency"
-            name="label"
-            value={this.state.label}
-            onChange={this.onChangeHandler}
-          >
-            <CurrencyOptions value="" name="label" disabled></CurrencyOptions>
-            {currencies.map((currency) => {
-              return (
-                <CurrencyOptions
-                  key={uniqid()}
-                  name="label"
-                  value={currency.label}
-                >
-                  {currency.symbol}
-                  {currency.label}
-                </CurrencyOptions>
-              );
-            })}
-          </SelectCurrency>
-        </CurrencyOptionsWrapper>
-      </Label>
+      <>
+        <Query query={GET_CURRENCIES}>
+          {({ loading, error, data }) => {
+            if (loading) return <p>loading...</p>;
+            if (error) console.log(error.message);
+
+            // console.log(data);
+            let currencies;
+            if (data) {
+              currencies = data.currencies;
+            }
+            const [renderedSymbol] = currencies.filter((i) =>
+              i.label === this.state.label ? i : null
+            );
+            return (
+              <Label htmlFor="currency">
+                {renderedSymbol ? renderedSymbol.symbol : "$"}
+                <CurrencyOptionsWrapper>
+                  <SelectCurrency
+                    id="currency"
+                    name="label"
+                    value={this.state.label}
+                    onChange={this.onChangeHandler}
+                  >
+                    <CurrencyOptions
+                      value=""
+                      name="label"
+                      disabled
+                    ></CurrencyOptions>
+                    {currencies.map((currency) => {
+                      return (
+                        <CurrencyOptions
+                          key={uniqid()}
+                          name="label"
+                          value={currency.label}
+                        >
+                          {currency.symbol}
+                          {currency.label}
+                        </CurrencyOptions>
+                      );
+                    })}
+                  </SelectCurrency>
+                </CurrencyOptionsWrapper>
+              </Label>
+            );
+          }}
+        </Query>
+      </>
     );
+
+    // const { currencies } = currencyData;
   }
 }
 

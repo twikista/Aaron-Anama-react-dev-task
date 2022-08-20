@@ -2,6 +2,8 @@ import React, { Component } from "react";
 // import Category from "./Category";
 import styled from "styled-components";
 import { categoriesData, item } from "../data";
+import { NavLink } from "react-router-dom";
+import uniqid from "uniqid";
 
 const Nav = styled.nav`
   display: flex;
@@ -11,7 +13,7 @@ const Nav = styled.nav`
   margin-top: 24px;
 `;
 
-const CategoryLink = styled.button`
+const CategoryLink = styled(NavLink)`
   text-transform: uppercase;
   color: #1d1f22;
   font-size: 16px;
@@ -42,30 +44,23 @@ const CategoryLink = styled.button`
 `;
 
 class Categories extends Component {
-  intialState = categoriesData.categories[0].name;
-  state = { activeCategory: this.intialState };
   render() {
+    console.log(this.state);
     const categories = categoriesData.categories.map(
       (category) => category.name
     );
     return (
       <Nav>
-        {categories.map((i, index) => {
+        {categories.map((i) => {
           return (
             <CategoryLink
-              as="a"
-              href="#"
-              key={index}
-              className={this.state.activeCategory === i ? "active" : ""}
-              onClick={() => {
-                this.setState({ activeCategory: i });
-              }}
+              category={i}
+              key={uniqid()}
+              to={i === "all" ? "/" : `/${i}`}
             >
               {i}
             </CategoryLink>
           );
-
-          // <Category key={index} category={i} />;
         })}
       </Nav>
     );
