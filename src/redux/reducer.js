@@ -11,7 +11,7 @@ import uniqid from "uniqid";
 const initialState = {
   cart: [],
   total: 0,
-  Amount: 0,
+  amount: 0,
 };
 
 const check = (a, b) => {
@@ -35,20 +35,20 @@ const reducer = (state = initialState, action) => {
       const existingCartItem = state.cart.filter(
         (i) => i.id === action.payload.id
       );
+      console.log(existingCartItem);
 
       //get values of selected attributes for item to be added to cart
       const selectedAttributeValues = Object.values(
         action.payload.selectedAttributes
       );
 
-      //get values of selected attributes for existing cart item
-      const cartItemAtrributevalues = Object.values(
-        existingCartItem[0].selectedAttributes
-      );
-
       console.log(existingCartItem);
 
       if (existingCartItem.length) {
+        //get values of selected attributes for existing cart item
+        const cartItemAtrributevalues = Object.values(
+          existingCartItem[0].selectedAttributes
+        );
         console.log(selectedAttributeValues, cartItemAtrributevalues);
         check(selectedAttributeValues, cartItemAtrributevalues);
 
@@ -123,7 +123,7 @@ const reducer = (state = initialState, action) => {
     console.log(amount);
     return { ...state, amount };
   }
-
+  console.log(state);
   return state;
 };
 

@@ -5,6 +5,8 @@ import Main from "./components/Main";
 import Product from "./components/Product";
 import Products from "./components/Products";
 import { Routes, Route, Navigate } from "react-router-dom";
+import { connect } from "react-redux";
+import { sumCartAmount } from "./redux/actionType";
 
 class App extends Component {
   state = { currentCurrency: "USD", symbol: "$", open: false };
@@ -21,12 +23,16 @@ class App extends Component {
     this.setState((prevState) => {
       return { ...this.state, open: !prevState.open };
     });
-    // this.setState({ ...this.state, open: toggleState });
-    // console.log("ayy");
   };
 
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.state.cart !== this.props.state.cart) {
+      this.props.dispatch(sumCartAmount());
+    }
+  }
+
   render() {
-    // console.log(this.state);
+    console.log(this.props);
     return (
       <div className="App">
         <Header
@@ -86,4 +92,9 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = (state, ownProps) => {
+  console.log(ownProps);
+  return { state: state };
+};
+
+export default connect(mapStateToProps)(App);

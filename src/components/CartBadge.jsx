@@ -1,6 +1,7 @@
 import { Component } from "react";
 import styled from "styled-components";
 import emptyCart from "../assets/empty_cart.svg";
+import { connect } from "react-redux";
 
 const CartWrapper = styled.button`
   border: none;
@@ -37,27 +38,19 @@ const CartAmout = styled.span`
 `;
 
 class CartBadge extends Component {
-  // state = { open: false };
-  // handler = () => {
-  //   this.setState((prevState) => {
-  //     return { open: !prevState.open };
-  //   });
-  // };
-
-  // componentDidUpdate(prevprops, prevState) {
-  //   if (prevState !== this.state) {
-  //     this.props.overLaytoggle(this.state.open);
-  //   }
-  // }
   render() {
-    // console.log(this.props);
+    console.log(this.props.amount);
     return (
       <CartWrapper onClick={this.props.overLayToggler}>
         <CartImage src={emptyCart} />
-        <CartAmout>3</CartAmout>
+        <CartAmout>{this.props.amount}</CartAmout>
       </CartWrapper>
     );
   }
 }
 
-export default CartBadge;
+const mapStateToProps = (state) => {
+  return { amount: state.amount };
+};
+
+export default connect(mapStateToProps)(CartBadge);

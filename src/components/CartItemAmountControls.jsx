@@ -2,7 +2,11 @@ import { Component } from "react";
 import styled from "styled-components";
 import plusIcon from "../assets/plus-square.svg";
 import minusIcon from "../assets/minus-square.svg";
-import { increaseAmount, decreaseAmount } from "../redux/actionType";
+import {
+  increaseAmount,
+  decreaseAmount,
+  // sumCartAmount,
+} from "../redux/actionType";
 import { connect } from "react-redux";
 
 //increment/decrement amount controls
@@ -27,6 +31,14 @@ const Amount = styled.span`
 `;
 
 class CartItemAmountControls extends Component {
+  // componentDidMount() {
+  //   this.props.sumCartAmount();
+  // }
+
+  // componentDidUpdate() {
+  //   this.props.sumCartAmount();
+  // }
+
   render() {
     const { id } = this.props;
     const {
@@ -37,6 +49,7 @@ class CartItemAmountControls extends Component {
       lineHeight,
       amount,
     } = this.props;
+    // this.props.sumCartAmount();
     return (
       <ControlWrapper wrapperWidth={wrapperWidth}>
         <AmountControlIcon
@@ -68,6 +81,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     increaseAmount: (id) => dispatch(increaseAmount(id)),
     decreaseAmount: (id) => dispatch(decreaseAmount(id)),
+    // sumCartAmount: () => dispatch(sumCartAmount()),
   };
 };
 

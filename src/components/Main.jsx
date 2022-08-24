@@ -18,6 +18,7 @@ const Wrapper = styled.div`
 
 class Main extends Component {
   render() {
+    console.log("hello");
     return (
       <MainContainer>
         <CartOverlay
