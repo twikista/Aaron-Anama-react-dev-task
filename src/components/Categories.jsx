@@ -4,6 +4,8 @@ import styled from "styled-components";
 import { categoriesData, item } from "../data";
 import { NavLink } from "react-router-dom";
 import uniqid from "uniqid";
+import { GET_CATEGORIES } from "../queries/queries";
+import { Query } from "@apollo/client/react/components";
 
 const Nav = styled.nav`
   display: flex;
@@ -45,24 +47,33 @@ const CategoryLink = styled(NavLink)`
 
 class Categories extends Component {
   render() {
-    console.log(this.state);
-    const categories = categoriesData.categories.map(
-      (category) => category.name
-    );
     return (
-      <Nav>
-        {categories.map((i) => {
-          return (
-            <CategoryLink
-              category={i}
-              key={uniqid()}
-              to={i === "all" ? "/" : `/${i}`}
-            >
-              {i}
-            </CategoryLink>
-          );
-        })}
-      </Nav>
+      <>
+        {
+          <Query query={GET_CATEGORIES}>
+            {({ loading, error, data }) => {
+              if (loading) return <p>loading...</p>;
+
+              return (
+                <Nav>
+                  {data &&
+                    data.categories.map(({ name }) => {
+                      return (
+                        <CategoryLink
+                          category={name}
+                          key={uniqid()}
+                          to={name === "all" ? "/" : `/${name}`}
+                        >
+                          {name}
+                        </CategoryLink>
+                      );
+                    })}
+                </Nav>
+              );
+            }}
+          </Query>
+        }
+      </>
     );
   }
 }

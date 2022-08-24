@@ -1,6 +1,7 @@
 import { Component } from "react";
 import styled from "styled-components";
 import MinicartItems from "./MiniCartItems";
+import { Link } from "react-router-dom";
 
 const MiniCartContainer = styled.article`
   width: 325px;
@@ -15,6 +16,7 @@ const MiniCartContainer = styled.article`
   gap: 32px;
   color: #1d1f22;
   line-height: 1.6;
+  z-index: 21;
 `;
 
 const CartTop = styled.div`
@@ -117,6 +119,10 @@ const CheckoutButton = styled(ViweBagButton)`
   font-family: "Raleway", sans-serif;
 `;
 
+const LinkWrapper = styled(Link)`
+  text-decoration: none;
+`;
+
 class Minicart extends Component {
   render() {
     const { symbol } = this.props.currentCurrency;
@@ -137,7 +143,10 @@ class Minicart extends Component {
           </CartTotal>
         </CartTop>
         <CartBottom>
-          <ViweBagButton>view bag</ViweBagButton>
+          <LinkWrapper to="/cart" onClick={this.props.overLayToggler}>
+            <ViweBagButton>view bag</ViweBagButton>
+          </LinkWrapper>
+
           <CheckoutButton>check out</CheckoutButton>
         </CartBottom>
       </MiniCartContainer>

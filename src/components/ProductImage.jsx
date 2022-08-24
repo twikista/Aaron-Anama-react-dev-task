@@ -61,7 +61,7 @@ class ProductImage extends Component {
         height={this.props.height}
         url={gallery[this.state.index]}
       >
-        {gallery.length - 1 && (
+        {gallery.length > 1 && (
           <ImageControlWrapper>
             <CaretWrapper onClick={this.decrementHandler}>
               <Caret src={`${caretLeft}`} />

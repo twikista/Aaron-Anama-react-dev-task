@@ -2,6 +2,8 @@ import { Component } from "react";
 import styled from "styled-components";
 import plusIcon from "../assets/plus-square.svg";
 import minusIcon from "../assets/minus-square.svg";
+import { increaseAmount, decreaseAmount } from "../redux/actionType";
+import { connect } from "react-redux";
 
 //increment/decrement amount controls
 const ControlWrapper = styled.div`
@@ -15,6 +17,7 @@ const ControlWrapper = styled.div`
 const AmountControlIcon = styled.img`
   width: 100%;
   height: ${(props) => props.iconHeight};
+  cursor: pointer;
 `;
 
 const Amount = styled.span`
@@ -25,6 +28,7 @@ const Amount = styled.span`
 
 class CartItemAmountControls extends Component {
   render() {
+    const { id } = this.props;
     const {
       wrapperWidth,
       iconHeight,
@@ -39,6 +43,7 @@ class CartItemAmountControls extends Component {
           src={`${plusIcon}`}
           alt="plus icon"
           iconHeight={iconHeight}
+          onClick={() => this.props.increaseAmount({ id })}
         />
         <Amount
           fontWeight={fontWeight}
@@ -51,10 +56,19 @@ class CartItemAmountControls extends Component {
           src={`${minusIcon}`}
           alt="minus icon"
           iconHeight={iconHeight}
+          onClick={() => this.props.decreaseAmount({ id })}
         />
       </ControlWrapper>
     );
   }
 }
 
-export default CartItemAmountControls;
+const mapDispatchToProps = (dispatch, ownProps) => {
+  console.log(ownProps);
+  return {
+    increaseAmount: (id) => dispatch(increaseAmount(id)),
+    decreaseAmount: (id) => dispatch(decreaseAmount(id)),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(CartItemAmountControls);

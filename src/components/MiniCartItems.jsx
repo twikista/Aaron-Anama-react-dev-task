@@ -1,7 +1,8 @@
 import { Component } from "react";
 import styled from "styled-components";
 import MiniCartItem from "./MiniCartItem";
-import { cart } from "../data";
+// import { cart } from "../data";
+import { connect } from "react-redux";
 
 const CartItemsContainer = styled.div`
   display: flex;
@@ -14,18 +15,27 @@ const CartItemsContainer = styled.div`
 
 class MinicartItems extends Component {
   render() {
+    const { cart = [] } = this.props;
     return (
       <CartItemsContainer>
-        {cart.map((item) => (
-          <MiniCartItem
-            key={item.id}
-            item={item}
-            currentCurrency={this.props.currentCurrency}
-          />
-        ))}
+        {cart.length ? (
+          cart.map((item) => (
+            <MiniCartItem
+              key={item.id}
+              item={item}
+              currentCurrency={this.props.currentCurrency}
+            />
+          ))
+        ) : (
+          <p>{`There are ${cart.length} items in your cart.`}</p>
+        )}
       </CartItemsContainer>
     );
   }
 }
 
-export default MinicartItems;
+const mapStateToProps = (state) => {
+  return { cart: state.cart };
+};
+
+export default connect(mapStateToProps)(MinicartItems);

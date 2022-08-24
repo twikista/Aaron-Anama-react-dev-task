@@ -14,7 +14,8 @@ const CartItemContainer = styled.article`
   border-top: 1px solid #e5e5e5;
   border-bottom: 1px solid #e5e5e5;
   padding: 24px 0;
-  max-height: 288px;
+  min-height: 200px;
+  /* max-height: 288px; */
 `;
 
 const CartItemDetailsWrapper = styled.div`
@@ -95,6 +96,7 @@ class MainCartItem extends Component {
   render() {
     const { item } = this.props;
     const { gallery } = item;
+
     return (
       <CartItemContainer>
         <CartItemDetailsWrapper>
@@ -124,9 +126,11 @@ class MainCartItem extends Component {
               attributes={item.attributes}
               styles={styles}
               disable={true}
+              selectedAttributes={
+                item.selectedAttributes ? item.selectedAttributes : null
+              }
             />
           </CartItemDetails>
-
           {/* <CartItemcontrols>
             <AmountControlIcon src={`${plusIcon}`} alt="plus icon" />
             <Amount>4</Amount>
@@ -138,7 +142,8 @@ class MainCartItem extends Component {
             fontWeight="500"
             fontSize="16px"
             lineHeight="1.6"
-            amount="6"
+            amount={item.amount}
+            id={item.id}
           />
         </CartItemDetailsWrapper>
         {/* <CartItemRight url={`${gallery[0]}`} /> */}

@@ -3,7 +3,6 @@ import styled from "styled-components";
 import ProductCard from "./ProductCard";
 import CartOverlay from "./CartOverlay";
 import withRouter from "./NavParamsHOC";
-import { Link, Outlet } from "react-router-dom";
 import { Get_CATEGORY } from "../queries/queries";
 import { Query } from "@apollo/client/react/components";
 
@@ -33,24 +32,10 @@ const ProductsWarpper = styled.section`
 `;
 
 class Products extends Component {
-  // state = { activeCategory: "all" };
-  // componentDidUpdate(prevProps, prevState) {
-  //   if(prevState !== this.state){
-
-  //   }
-  //   console.log(this.props);
-  //   //this.setState({ activeCategory: params });
-  // }
   render() {
-    console.log(this.props.params);
     const params = this.props.params;
-    console.log(params);
-    console.log();
     const title = Object.keys(params).length ? params.category : "all";
-    console.log(title);
 
-    // const categories = productData.categories;
-    // const { products } = categories.find((category) => category.name === "all");
     return (
       <>
         {
@@ -67,16 +52,16 @@ class Products extends Component {
                       data.category.products.map((product) => (
                         <ProductCard
                           key={product.id}
-                          {...product}
+                          product={product}
                           currentCurrency={this.props.currentCurrency}
                           activeCategory={title}
                         />
                       ))}
                   </ProductsWarpper>
-                  <CartOverlay
+                  {/* <CartOverlay
                     currentCurrency={this.props.currentCurrency}
                     isOpen={this.props.isOpen}
-                  />
+                  /> */}
                 </LandingPage>
               );
             }}

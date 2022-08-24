@@ -37,22 +37,22 @@ const CartAmout = styled.span`
 `;
 
 class CartBadge extends Component {
-  state = { open: false };
-  handler = () => {
-    this.setState((prevState) => {
-      return { open: !prevState.open };
-    });
-  };
+  // state = { open: false };
+  // handler = () => {
+  //   this.setState((prevState) => {
+  //     return { open: !prevState.open };
+  //   });
+  // };
 
-  componentDidUpdate(prevprops, prevState) {
-    if (prevState !== this.state) {
-      this.props.overLaytoggle(this.state.open);
-    }
-  }
+  // componentDidUpdate(prevprops, prevState) {
+  //   if (prevState !== this.state) {
+  //     this.props.overLaytoggle(this.state.open);
+  //   }
+  // }
   render() {
-    console.log(this.state);
+    // console.log(this.props);
     return (
-      <CartWrapper onClick={this.handler}>
+      <CartWrapper onClick={this.props.overLayToggler}>
         <CartImage src={emptyCart} />
         <CartAmout>3</CartAmout>
       </CartWrapper>

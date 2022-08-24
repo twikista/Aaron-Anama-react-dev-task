@@ -11,7 +11,7 @@ const MainCartContainer = styled.article`
   color: #1d1f22;
   font-family: "Raleway";
   margin-top: 80px;
-  margin: 32px;
+  /* margin: 32px; */
   /* border: solid red 1px; */
 `;
 

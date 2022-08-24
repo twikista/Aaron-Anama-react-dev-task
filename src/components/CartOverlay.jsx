@@ -9,18 +9,17 @@ const Overlay = styled.section`
   bottom: 0;
   right: 0;
   background: rgba(57, 55, 72, 0.22);
+  z-index: 19;
   /* display: none; */
 `;
 
 class CartOverlay extends Component {
   render() {
-    console.log(this.props);
-    const isOpen = this.props.isOpen;
     return (
       <>
-        {isOpen && (
+        {this.props.isOpen && (
           <Overlay>
-            <Minicart currentCurrency={this.props.currentCurrency} />
+            <Minicart {...this.props} />
           </Overlay>
         )}
       </>

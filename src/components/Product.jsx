@@ -6,8 +6,11 @@ import ProductAttributes from "./ProductAtrributes";
 import ProductName from "./ProductName";
 import Price from "./Price";
 import parse from "html-react-parser";
-// import withRouter from "./NavParamsHOC";
-// import { Link } from "react-router-dom";
+import withRouter from "./NavParamsHOC";
+import { GET_PRODUCT } from "../queries/queries";
+import { Query } from "@apollo/client/react/components";
+import { connect } from "react-redux";
+import { addToCart } from "../redux/actionType";
 
 const Container = styled.section`
   display: grid;
@@ -30,8 +33,6 @@ const ImageThumbNails = styled.article`
 const ImageThumbNail = styled.img`
   width: 80px;
   height: 80px;
-  /* background-image: url(${(props) => props.url}); */
-  /* background-size:contain; */
   cursor: pointer;
 `;
 
@@ -48,27 +49,12 @@ const ImageWrapper = styled.div`
 const ProductImage = styled.img`
   width: 100%;
   height: 100%;
-  /* max-height: 511px; */
 `;
 
 const ProductNameWrapper = styled.div`
   width: 100%;
   margin-bottom: 43px;
 `;
-
-// const ProductNameSpan = styled.span`
-//   font-weight: 600;
-//   padding-bottom: 16px;
-//   display: inline-block;
-// `;
-
-// const ProductName = styled.h2`
-//   font-family: "Raleway";
-//   font-style: normal;
-//   font-weight: 400;
-//   font-size: 30px;
-//   line-height: 27px;
-// `;
 
 const ProductDetails = styled.article`
   width: 292px;
@@ -92,12 +78,6 @@ const ProductpriceLabel = styled.h5`
   line-height: 18px;
   text-transform: uppercase;
 `;
-
-// const ProductPrice = styled.p`
-//   font-weight: 700;
-//   font-size: 24px;
-//   line-height: 18px;
-// `;
 
 const AddToCartButton = styled.button`
   display: flex;
@@ -167,7 +147,7 @@ const styles = {
 
 class Product extends Component {
   state = {
-    imageUrl: item.gallery[0],
+    imageUrl: "",
     selectedAttributes: {},
   };
 
@@ -187,70 +167,109 @@ class Product extends Component {
   };
 
   componentDidMount() {
-    console.log(this.props.params);
+    // console.log(this.state);
   }
 
   render() {
-    console.log(this.props, this.state);
-
-    const { gallery } = item;
+    console.log(this.state);
+    const id = this.props.params.product;
     return (
-      <Container>
-        <ImageThumbNails>
-          {gallery.map((url, index) => (
-            <ImageThumbNail
-              key={uniqid()}
-              src={url}
-              alt={`${item.name} image-${index + 1}`}
-              onClick={() => this.imageToggler(url)}
-            />
-          ))}
-        </ImageThumbNails>
-        <ProductDetailsWrapper>
-          <ImageWrapper>
-            <ProductImage src={this.state.imageUrl} alt={item.name} />
-          </ImageWrapper>
-          <ProductDetails>
-            <ProductName
-              fontFamily="Raleway"
-              fontWeight="400"
-              fontSize="30px"
-              lineHeight="27px"
-              color="#1d1f22"
-              marginBottom="43px"
-              spanFontWeight="600"
-              spanMarginBottom="16px"
-              item={item}
-              {...this.props}
-            />
-            <ProductAttributes
-              attributes={item.attributes}
-              styles={styles}
-              width="292px"
-              uppercase="uppercase"
-              selectedAttributesHandler={this.selectedAttributesHandler}
-              {...this.props}
-            />
-            <ProductPriceWrapper>
-              <ProductpriceLabel>price</ProductpriceLabel>
-              {/* <ProductPrice>$50.00</ProductPrice> */}
-              <Price
-                prices={item.prices}
-                currentCurrency={this.props.currentCurrency}
-                fontWeight="700"
-                fontSize="24px"
-                lineHeight="18px"
-              />
-            </ProductPriceWrapper>
-            <AddToCartButton>add to cart</AddToCartButton>
-            <ProductDesriptionWrapper>
-              {parse(item.description)}
-            </ProductDesriptionWrapper>
-          </ProductDetails>
-        </ProductDetailsWrapper>
-      </Container>
+      <>
+        {
+          <Query query={GET_PRODUCT} variables={{ id }}>
+            {({ loading, error, data }) => {
+              // if (data) console.log(data);
+              console.log(this.state);
+              return (
+                <>
+                  {data && (
+                    <Container>
+                      <ImageThumbNails>
+                        {data.product.gallery.map((url, index) => (
+                          <ImageThumbNail
+                            key={uniqid()}
+                            src={url}
+                            alt={`${data.product.name} image-${index + 1}`}
+                            onClick={() => this.imageToggler(url)}
+                          />
+                        ))}
+                      </ImageThumbNails>
+                      <ProductDetailsWrapper>
+                        <ImageWrapper>
+                          <ProductImage
+                            src={
+                              this.state.imageUrl
+                                ? this.state.imageUrl
+                                : data.product.gallery[0]
+                            }
+                            alt={data.product.name}
+                          />
+                        </ImageWrapper>
+                        <ProductDetails>
+                          <ProductName
+                            fontFamily="Raleway"
+                            fontWeight="400"
+                            fontSize="30px"
+                            lineHeight="27px"
+                            color="#1d1f22"
+                            marginBottom="43px"
+                            spanFontWeight="600"
+                            spanMarginBottom="16px"
+                            item={data.product}
+                            {...this.props}
+                          />
+                          <ProductAttributes
+                            attributes={data.product.attributes}
+                            styles={styles}
+                            width="292px"
+                            uppercase="uppercase"
+                            selectedAttributesHandler={
+                              this.selectedAttributesHandler
+                            }
+                            {...this.props}
+                          />
+                          <ProductPriceWrapper>
+                            <ProductpriceLabel>price</ProductpriceLabel>
+                            {/* <ProductPrice>$50.00</ProductPrice> */}
+                            <Price
+                              prices={data.product.prices}
+                              currentCurrency={this.props.currentCurrency}
+                              fontWeight="700"
+                              fontSize="24px"
+                              lineHeight="18px"
+                            />
+                          </ProductPriceWrapper>
+                          <AddToCartButton
+                            onClick={() =>
+                              this.props.addToCart({
+                                ...data.product,
+                                selectedAttributes:
+                                  this.state.selectedAttributes,
+                                amount: 1,
+                              })
+                            }
+                          >
+                            add to cart
+                          </AddToCartButton>
+                          <ProductDesriptionWrapper>
+                            {parse(data.product.description)}
+                          </ProductDesriptionWrapper>
+                        </ProductDetails>
+                      </ProductDetailsWrapper>
+                    </Container>
+                  )}
+                </>
+              );
+            }}
+          </Query>
+        }
+      </>
     );
   }
 }
 
-export default Product;
+const mapDispatchToProps = (dispatch) => {
+  return { addToCart: (product) => dispatch(addToCart(product)) };
+};
+
+export default connect(null, mapDispatchToProps)(withRouter(Product));

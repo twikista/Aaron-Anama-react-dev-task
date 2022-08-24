@@ -4,6 +4,8 @@ import Price from "./Price";
 import addAproductIcon from "../assets/add_product_icon.svg";
 import withRouter from "./NavParamsHOC";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { addToCart } from "../redux/actionType";
 
 const CardWrapper = styled.article`
   width: calc(386px - 20px);
@@ -41,14 +43,14 @@ const ProductImage = styled.div`
   object-fit: contain;
   position: relative;
 `;
-const AddToCardIcon = styled.img`
+const AddToCartIcon = styled.img`
   position: absolute;
   width: 52px;
   height: 52px;
-  bottom: -26px;
-  right: 15px;
+  bottom: 15%;
+  right: 25px;
   box-shadow: 0px 4px 11px rgba(29, 31, 34, 0.1);
-  z-index: 10;
+  z-index: 15;
   border-radius: 50%;
   display: none;
 `;
@@ -67,10 +69,6 @@ const ProductName = styled.h4`
   font-size: 18px;
   font-weight: 300;
 `;
-// const ProductPrice = styled.h3`
-//   font-size: 18px;
-//   font-weight: 500;
-// `;
 
 const OutOfStockOverlay = styled(CardWrapper)`
   position: absolute;
@@ -84,36 +82,88 @@ const OutOfStockOverlay = styled(CardWrapper)`
   opacity: 0.5;
 `;
 
+const WrappingLink = styled(Link)`
+  text-decoration: none;
+  position: relative;
+  /* z-index: 3; */
+  width: 100%;
+`;
+
+const Container = styled.div`
+  width: 100%;
+`;
+
 class ProductCard extends Component {
+  setInitaitalState = () => {
+    let defaultAttributes = {};
+    const attributes = this.props.product.attributes;
+    for (let i = 0; i < attributes.length; i++) {
+      const attribute = {
+        [attributes[i].name]: `${attributes[i].items[0].displayValue}`,
+      };
+      defaultAttributes = { ...defaultAttributes, ...attribute };
+    }
+    return defaultAttributes;
+  };
+  state = { selectedAtrributes: this.setInitaitalState() };
+  // componentDidMount() {
+  //   const bla = this.setInitaitalState();
+  //   console.log(bla);
+  //   this.setState({ ...this.state.selectedAttributes, ...bla });
+  // }
+
   render() {
     console.log(this.props);
-    const { name, inStock, gallery, prices } = this.props;
+    const { name, inStock, gallery, prices, id } = this.props.product;
     const activeCategory = this.props.activeCategory;
     console.log(activeCategory);
-    return (
-      <CardWrapper>
-        <ProductImage url={`${gallery[0]}`}>
-          {inStock && (
-            <Link to={`/${activeCategory}/${this.props.id}}`}>
-              <AddToCardIcon src={`${addAproductIcon}`} />
-            </Link>
-          )}
-        </ProductImage>
+    const content = (
+      <Container>
+        <ProductImage url={`${gallery[0]}`}></ProductImage>
         <CardContent>
           <ProductName>{name}</ProductName>
           {/* <ProductPrice>$50.58</ProductPrice> */}
           <Price
-            prices={this.props.prices}
+            prices={this.props.product.prices}
             currentCurrency={this.props.currentCurrency}
             fontWeight="500"
             fontSize="18px"
             lineHeight="29px"
           />
         </CardContent>
-        {!inStock && <OutOfStockOverlay>out of stock</OutOfStockOverlay>}
-      </CardWrapper>
+      </Container>
+    );
+    return (
+      <>
+        {inStock ? (
+          <CardWrapper>
+            <WrappingLink to={`/${activeCategory}/${id}`}>
+              {content}
+            </WrappingLink>
+            <AddToCartIcon
+              src={`${addAproductIcon}`}
+              onClick={() =>
+                this.props.addToCart({
+                  ...this.props.product,
+                  selectedAttributes: this.state.selectedAtrributes,
+                  amount: 1,
+                })
+              }
+            />
+          </CardWrapper>
+        ) : (
+          <CardWrapper>
+            {content}
+            <OutOfStockOverlay>out of stock</OutOfStockOverlay>
+          </CardWrapper>
+        )}
+      </>
     );
   }
 }
 
-export default withRouter(ProductCard);
+const mapDispatchToProps = (dispatch) => {
+  return { addToCart: (product) => dispatch(addToCart(product)) };
+};
+
+export default connect(null, mapDispatchToProps)(withRouter(ProductCard));

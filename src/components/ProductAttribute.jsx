@@ -70,11 +70,7 @@ const ColorAttributeValue = styled(AttributeValue)`
   }
 `;
 
-const AttributeRadioButton = styled.input`
-  &:checked {
-    display: none;
-  }
-`;
+//[this.props.name]: `${this.props.items[0].displayValue}`
 
 class ProductAttribute extends Component {
   initialState = this.props.selectedAttributes
@@ -93,6 +89,11 @@ class ProductAttribute extends Component {
       this.props.selectedAttributesHandler(this.state);
     }
   }
+
+  componentDidMount() {
+    // this.props.selectedAttributesHandler(this.state);
+  }
+
   render() {
     console.log(this.state, this.initialState);
 

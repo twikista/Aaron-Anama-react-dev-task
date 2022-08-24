@@ -1,9 +1,11 @@
 import { Component } from "react";
 import styled from "styled-components";
+import CartOverlay from "./CartOverlay";
 
 const MainContainer = styled.main`
   width: 100%;
   position: relative;
+  height: 100%;
 `;
 
 const Wrapper = styled.div`
@@ -18,6 +20,11 @@ class Main extends Component {
   render() {
     return (
       <MainContainer>
+        <CartOverlay
+          currentCurrency={this.props.currentCurrency}
+          isOpen={this.props.isOpen}
+          overLayToggler={this.props.overLayToggler}
+        />
         <Wrapper>{this.props.children}</Wrapper>
       </MainContainer>
     );

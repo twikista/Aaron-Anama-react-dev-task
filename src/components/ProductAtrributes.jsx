@@ -15,16 +15,16 @@ const AtributeContainer = styled.article`
 class ProductAttributes extends Component {
   state = {};
 
-  itemsHandler = (attribute, index) => {
-    const data = [...this.state];
-    data[index] = attribute;
-    this.setState((prevState) => [...prevState, ...data]);
-    this.props.updateAttributeHandler(this.state.attributes);
-  };
+  // itemsHandler = (attribute, index) => {
+  //   const data = [...this.state];
+  //   data[index] = attribute;
+  //   this.setState((prevState) => [...prevState, ...data]);
+  //   this.props.updateAttributeHandler(this.state.attributes);
+  // };
 
   render() {
     const { attributes, styles } = this.props;
-    console.log(attributes);
+    // console.log(attributes);
     // const styles = {
     //   attributeTitle: {
     //     fontweight: "400",

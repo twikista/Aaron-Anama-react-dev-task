@@ -1,6 +1,6 @@
 import { Component } from "react";
 import styled from "styled-components";
-import { currencyData } from "../data";
+// import { currencyData } from "../data";
 import selectArrowDown from "../assets/select_arrow_down.svg";
 import selectArrowUp from "../assets/select_arrow_up.svg";
 import uniqid from "uniqid";
@@ -67,10 +67,9 @@ class CurrencySelector extends Component {
     symbol: "",
   };
 
-  onChangeHandler = (e) => {
+  onChangeHandler = (e, data) => {
     const { name, value } = e.target;
-    const { currencies } = currencyData;
-    const currency = currencies.find((i) => i.label === value);
+    const currency = data.find((i) => i.label === value);
     this.setState({ [name]: value, symbol: currency.symbol });
   };
 
@@ -104,7 +103,7 @@ class CurrencySelector extends Component {
                     id="currency"
                     name="label"
                     value={this.state.label}
-                    onChange={this.onChangeHandler}
+                    onChange={(e) => this.onChangeHandler(e, currencies)}
                   >
                     <CurrencyOptions
                       value=""

@@ -43,4 +43,43 @@ const Get_CATEGORY = gql`
   }
 `;
 
-export { GET_CURRENCIES, Get_CATEGORY };
+const GET_CATEGORIES = gql`
+  query getCategories {
+    categories {
+      name
+    }
+  }
+`;
+
+const GET_PRODUCT = gql`
+  query getProduct($id: String!) {
+    product(id: $id) {
+      id
+      name
+      inStock
+      gallery
+      description
+      category
+      attributes {
+        id
+        name
+        type
+        items {
+          displayValue
+          value
+          id
+        }
+      }
+      prices {
+        currency {
+          label
+          symbol
+        }
+        amount
+      }
+      brand
+    }
+  }
+`;
+
+export { GET_CURRENCIES, Get_CATEGORY, GET_CATEGORIES, GET_PRODUCT };

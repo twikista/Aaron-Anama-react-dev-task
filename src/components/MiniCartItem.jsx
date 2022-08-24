@@ -115,6 +115,9 @@ class MiniCartItem extends Component {
               attributes={item.attributes}
               styles={styles}
               disable={true}
+              selectedAttributes={
+                item.selectedAttributes ? item.selectedAttributes : null
+              }
             />
           </CartItemDetails>
 
@@ -129,7 +132,8 @@ class MiniCartItem extends Component {
             fontWeight="500"
             fontSize="16px"
             lineHeight="1.6"
-            amount="6"
+            amount={item.amount}
+            id={item.id}
           />
         </CartItemDetailsWrapper>
         {/* <CartItemRight url={`${gallery[0]}`} /> */}

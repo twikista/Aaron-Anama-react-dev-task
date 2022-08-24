@@ -17,19 +17,27 @@ class App extends Component {
     // console.log(this.state);
   };
 
-  overLaytoggle = (toggleState) => {
-    this.setState({ ...this.state, open: toggleState });
+  overLayToggler = () => {
+    this.setState((prevState) => {
+      return { ...this.state, open: !prevState.open };
+    });
+    // this.setState({ ...this.state, open: toggleState });
+    // console.log("ayy");
   };
 
   render() {
-    console.log(this.state);
+    // console.log(this.state);
     return (
       <div className="App">
         <Header
           getSelectedCurrency={this.getSelectedCurrency}
-          overLaytoggle={this.overLaytoggle}
+          overLayToggler={this.overLayToggler}
         />
-        <Main>
+        <Main
+          currentCurrency={this.state}
+          isOpen={this.state.open}
+          overLayToggler={this.overLayToggler}
+        >
           <Routes>
             <Route
               path="/"
