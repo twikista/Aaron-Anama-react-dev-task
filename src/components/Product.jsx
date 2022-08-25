@@ -171,18 +171,19 @@ class Product extends Component {
   }
 
   render() {
-    console.log(this.state);
     const id = this.props.params.product;
     return (
       <>
         {
           <Query query={GET_PRODUCT} variables={{ id }}>
             {({ loading, error, data }) => {
-              // if (data) console.log(data);
-              console.log(this.state);
-              return (
-                <>
-                  {data && (
+              if (data) {
+                const activePrice = this.props.setCurrentPrice(
+                  data.product.prices
+                );
+                // console.log(data.product);
+                return (
+                  <>
                     <Container>
                       <ImageThumbNails>
                         {data.product.gallery.map((url, index) => (
@@ -246,6 +247,7 @@ class Product extends Component {
                                 selectedAttributes:
                                   this.state.selectedAttributes,
                                 amount: 1,
+                                activePrice: activePrice,
                               })
                             }
                           >
@@ -257,9 +259,10 @@ class Product extends Component {
                         </ProductDetails>
                       </ProductDetailsWrapper>
                     </Container>
-                  )}
-                </>
-              );
+                  </>
+                );
+              }
+              console.log(this.props);
             }}
           </Query>
         }

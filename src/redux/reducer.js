@@ -5,6 +5,7 @@ import {
   INCREASE_AMOUNT,
   DECREASE_AMOUNT,
   SUM_CART_AMOUNT,
+  UPDATE_PRICE,
 } from "./actions";
 import uniqid from "uniqid";
 
@@ -12,6 +13,8 @@ const initialState = {
   cart: [],
   total: 0,
   amount: 0,
+  tax: 0,
+  currencyDetails: { label: "USD", symbol: "$" },
 };
 
 const check = (a, b) => {
@@ -110,18 +113,36 @@ const reducer = (state = initialState, action) => {
   }
 
   if (action.type === SUM_CART_AMOUNT) {
-    const { amount } = state.cart.reduce(
+    const { amount, total, tax } = state.cart.reduce(
       (cartTotal, cartItem) => {
-        const { amount } = cartItem;
-        cartTotal.amount += amount;
+        const { amount, activePrice } = cartItem;
+        const itemTotal = activePrice.amount * amount;
+        cartTotal.total += parseFloat(itemTotal.toFixed(2));
+        cartTotal.amount += parseFloat(amount.toFixed(2));
+        cartTotal.tax += parseFloat((itemTotal * 0.21).toFixed(2));
         return cartTotal;
       },
       {
         amount: 0,
+        total: 0,
+        tax: 0,
       }
     );
     console.log(amount);
-    return { ...state, amount };
+    return { ...state, amount, total, tax };
+  }
+
+  if (action.type === UPDATE_PRICE) {
+    console.log(action.payload);
+    const { label, symbol } = action.payload;
+    const tempCart = state.cart.map((cartItem) => {
+      const activePrice = cartItem.prices.find(
+        (priceItem) => priceItem.currency.label === label
+      );
+      return { ...cartItem, activePrice: activePrice };
+    });
+
+    return { ...state, currencyDetails: action.payload, cart: tempCart };
   }
   console.log(state);
   return state;

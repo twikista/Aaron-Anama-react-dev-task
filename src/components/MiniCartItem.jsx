@@ -54,33 +54,6 @@ const styles = {
   },
 };
 
-//increment/decrement amount controls
-// const CartItemcontrols = styled.div`
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: space-between;
-//   align-items: center;
-//   width: 24px;
-//   align-self: stretch;
-// `;
-// const AmountControlIcon = styled.img`
-//   width: 24px;
-//   height: 24px;
-// `;
-
-// const Amount = styled.span`
-//   font-weight: 500;
-//   font-size: 16px;
-//   line-height: 1.6;
-// `;
-
-// const CartItemRight = styled.div`
-//   width: 121px;
-//   background: url(${(props) => props.url});
-//   background-position: center;
-//   background-size: contain;
-//   background-repeat: no-repeat;
-// `;
 
 class MiniCartItem extends Component {
   render() {
@@ -120,12 +93,6 @@ class MiniCartItem extends Component {
               }
             />
           </CartItemDetails>
-
-          {/* <CartItemcontrols>
-            <AmountControlIcon src={`${plusIcon}`} alt="plus icon" />
-            <Amount>4</Amount>
-            <AmountControlIcon src={`${minusIcon}`} alt="minus icon" />
-          </CartItemcontrols> */}
           <CartItemAmountControls
             wrapperWidth="24px"
             iconHeight="24px"

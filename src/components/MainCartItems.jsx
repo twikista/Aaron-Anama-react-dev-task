@@ -1,8 +1,6 @@
 import { Component } from "react";
 import styled from "styled-components";
 import MainCartItem from "./MainCartItem";
-import { cart } from "../data";
-import { connect } from "react-redux";
 
 const CartItemsContainer = styled.div`
   display: flex;
@@ -34,7 +32,4 @@ class MainCartItems extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return { cart: state.cart };
-};
-export default connect(mapStateToProps)(MainCartItems);
+export default MainCartItems;

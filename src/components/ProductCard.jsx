@@ -94,29 +94,25 @@ const Container = styled.div`
 `;
 
 class ProductCard extends Component {
-  setInitaitalState = () => {
-    let defaultAttributes = {};
-    const attributes = this.props.product.attributes;
-    for (let i = 0; i < attributes.length; i++) {
-      const attribute = {
-        [attributes[i].name]: `${attributes[i].items[0].displayValue}`,
-      };
-      defaultAttributes = { ...defaultAttributes, ...attribute };
-    }
-    return defaultAttributes;
-  };
-  state = { selectedAtrributes: this.setInitaitalState() };
-  // componentDidMount() {
-  //   const bla = this.setInitaitalState();
-  //   console.log(bla);
-  //   this.setState({ ...this.state.selectedAttributes, ...bla });
-  // }
+  // setInitaitalState = () => {
+  //   let defaultAttributes = {};
+  //   const attributes = this.props.product.attributes;
+  //   for (let i = 0; i < attributes.length; i++) {
+  //     const attribute = {
+  //       [attributes[i].name]: `${attributes[i].items[0].displayValue}`,
+  //     };
+  //     defaultAttributes = { ...defaultAttributes, ...attribute };
+  //   }
+  //   return defaultAttributes;
+  // };
+  state = { selectedAtrributes: {} };
 
   render() {
-    console.log(this.props);
-    const { name, inStock, gallery, prices, id } = this.props.product;
+    const { name, inStock, gallery, prices, id, attributes } =
+      this.props.product;
     const activeCategory = this.props.activeCategory;
-    console.log(activeCategory);
+    const { currentCurrency } = this.props.currentCurrency;
+    const activePrice = this.props.setCurrentPrice(prices);
     const content = (
       <Container>
         <ProductImage url={`${gallery[0]}`}></ProductImage>
@@ -140,16 +136,19 @@ class ProductCard extends Component {
             <WrappingLink to={`/${activeCategory}/${id}`}>
               {content}
             </WrappingLink>
-            <AddToCartIcon
-              src={`${addAproductIcon}`}
-              onClick={() =>
-                this.props.addToCart({
-                  ...this.props.product,
-                  selectedAttributes: this.state.selectedAtrributes,
-                  amount: 1,
-                })
-              }
-            />
+            {attributes.length === 0 && (
+              <AddToCartIcon
+                src={`${addAproductIcon}`}
+                onClick={() =>
+                  this.props.addToCart({
+                    ...this.props.product,
+                    selectedAttributes: this.state.selectedAtrributes,
+                    amount: 1,
+                    activePrice: activePrice,
+                  })
+                }
+              />
+            )}
           </CardWrapper>
         ) : (
           <CardWrapper>

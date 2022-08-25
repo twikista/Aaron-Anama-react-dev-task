@@ -55,13 +55,10 @@ class Products extends Component {
                           product={product}
                           currentCurrency={this.props.currentCurrency}
                           activeCategory={title}
+                          setCurrentPrice={this.props.setCurrentPrice}
                         />
                       ))}
                   </ProductsWarpper>
-                  {/* <CartOverlay
-                    currentCurrency={this.props.currentCurrency}
-                    isOpen={this.props.isOpen}
-                  /> */}
                 </LandingPage>
               );
             }}

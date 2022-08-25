@@ -62,7 +62,8 @@ class Categories extends Component {
                         <CategoryLink
                           category={name}
                           key={uniqid()}
-                          to={name === "all" ? "/" : `/${name}`}
+                          // to={name === "all" ? "/" : `/${name}`}
+                          to={`/${name}`}
                         >
                           {name}
                         </CategoryLink>

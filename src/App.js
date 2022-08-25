@@ -5,6 +5,7 @@ import Main from "./components/Main";
 import Product from "./components/Product";
 import Products from "./components/Products";
 import { Routes, Route, Navigate } from "react-router-dom";
+import withRouter from "./components/NavParamsHOC";
 import { connect } from "react-redux";
 import { sumCartAmount } from "./redux/actionType";
 
@@ -25,6 +26,13 @@ class App extends Component {
     });
   };
 
+  setCurrentPrice = (pricesArray) => {
+    const activePrice = pricesArray.find(
+      (price) => price.currency.label === `${this.state.currentCurrency}`
+    );
+    return activePrice;
+  };
+
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.state.cart !== this.props.state.cart) {
       this.props.dispatch(sumCartAmount());
@@ -33,6 +41,7 @@ class App extends Component {
 
   render() {
     console.log(this.props);
+    const path = "" ? "/all" : null;
     return (
       <div className="App">
         <Header
@@ -41,19 +50,12 @@ class App extends Component {
         />
         <Main
           currentCurrency={this.state}
+          setCurrentPrice={this.setCurrentPrice}
           isOpen={this.state.open}
           overLayToggler={this.overLayToggler}
         >
           <Routes>
-            <Route
-              path="/"
-              element={
-                <Products
-                  currentCurrency={this.state}
-                  isOpen={this.state.open}
-                />
-              }
-            />
+            <Route path={"/"} element={<Navigate to="all" />} />
             {/* <Route path="all" element={<Navigate to="/" />} /> */}
             <Route
               path="/:category"
@@ -61,6 +63,7 @@ class App extends Component {
                 <Products
                   currentCurrency={this.state}
                   isOpen={this.state.open}
+                  setCurrentPrice={this.setCurrentPrice}
                 />
               }
             />
@@ -75,7 +78,12 @@ class App extends Component {
             /> */}
             <Route
               path="/:category/:product"
-              element={<Product currentCurrency={this.state} />}
+              element={
+                <Product
+                  currentCurrency={this.state}
+                  setCurrentPrice={this.setCurrentPrice}
+                />
+              }
             />
             {/* <Route
               path="/product/:produt"
@@ -83,7 +91,12 @@ class App extends Component {
             /> */}
             <Route
               path="/cart"
-              element={<MainCart currentCurrency={this.state} />}
+              element={
+                <MainCart
+                  currentCurrency={this.state}
+                  setCurrentPrice={this.setCurrentPrice}
+                />
+              }
             />
           </Routes>
         </Main>
@@ -97,4 +110,4 @@ const mapStateToProps = (state, ownProps) => {
   return { state: state };
 };
 
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps)(withRouter(App));

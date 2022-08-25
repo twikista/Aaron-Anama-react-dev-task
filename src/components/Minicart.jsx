@@ -2,6 +2,7 @@ import { Component } from "react";
 import styled from "styled-components";
 import MinicartItems from "./MiniCartItems";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 
 const MiniCartContainer = styled.article`
   width: 325px;
@@ -125,7 +126,8 @@ const LinkWrapper = styled(Link)`
 
 class Minicart extends Component {
   render() {
-    const { symbol } = this.props.currentCurrency;
+    const { amount, tax, total, cart, currencyDetails } = this.props.state;
+    const { symbol } = currencyDetails;
     return (
       <MiniCartContainer>
         <CartTop>
@@ -135,11 +137,16 @@ class Minicart extends Component {
               <HeadingSpan>3 items</HeadingSpan>
             </CartHeading>
           </CartHeader>
-          <MinicartItems currentCurrency={this.props.currentCurrency} />{" "}
-          {/*make a component*/}
+          <MinicartItems
+            currentCurrency={this.props.currentCurrency}
+            cart={cart}
+          />
           <CartTotal>
             <CartTotalLabel>total</CartTotalLabel>
-            <CartTotalAmount>{symbol}200</CartTotalAmount>
+            <CartTotalAmount>
+              {symbol}
+              {`${total.toFixed(2)}`}
+            </CartTotalAmount>
           </CartTotal>
         </CartTop>
         <CartBottom>
@@ -154,4 +161,8 @@ class Minicart extends Component {
   }
 }
 
-export default Minicart;
+const mapStateToProps = (state) => {
+  return { state: state };
+};
+
+export default connect(mapStateToProps)(Minicart);

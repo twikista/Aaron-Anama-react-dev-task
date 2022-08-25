@@ -1,7 +1,7 @@
 import { Component } from "react";
 import styled from "styled-components";
 import MainCartItems from "./MainCartItems";
-import Price from "./Price";
+import { connect } from "react-redux";
 
 const MainCartContainer = styled.article`
   width: 100%;
@@ -87,24 +87,34 @@ const OrderButton = styled.button`
 
 class MainCart extends Component {
   render() {
-    const { symbol } = this.props.currentCurrency;
-    console.log(this.props.currentCurrency.currentCurrency, symbol);
+    const { amount, tax, total, cart, currencyDetails } = this.props.state;
+    const { symbol } = currencyDetails;
+    // console.log(this.props.currentCurrency.currentCurrency, symbol);
     return (
       <MainCartContainer>
         <CartHeading>cart</CartHeading>
-        <MainCartItems currentCurrency={this.props.currentCurrency} />
+        <MainCartItems
+          currentCurrency={this.props.currentCurrency}
+          cart={cart}
+        />
         <CartTotalWrapper>
           <CartTotalItem>
             <CartSubTotalLabel>tax 21%:</CartSubTotalLabel>
-            <CartTotalAmount>{symbol}42.00</CartTotalAmount>
+            <CartTotalAmount>
+              {symbol}
+              {`${tax.toFixed(2)}`}
+            </CartTotalAmount>
           </CartTotalItem>
           <CartTotalItem>
             <CartSubTotalLabel>quantity:</CartSubTotalLabel>
-            <CartTotalAmount>{symbol}3</CartTotalAmount>
+            <CartTotalAmount>{amount}</CartTotalAmount>
           </CartTotalItem>
           <CartTotalItem>
             <CartTotalLabel>total:</CartTotalLabel>
-            <CartTotalAmount>{symbol}200.00</CartTotalAmount>
+            <CartTotalAmount>
+              {symbol}
+              {`${total.toFixed(2)}`}
+            </CartTotalAmount>
           </CartTotalItem>
           <OrderButton>order</OrderButton>
         </CartTotalWrapper>
@@ -113,4 +123,8 @@ class MainCart extends Component {
   }
 }
 
-export default MainCart;
+const mapStateToProps = (state) => {
+  return { state: state };
+};
+
+export default connect(mapStateToProps)(MainCart);

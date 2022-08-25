@@ -5,8 +5,9 @@ import selectArrowDown from "../assets/select_arrow_down.svg";
 import selectArrowUp from "../assets/select_arrow_up.svg";
 import uniqid from "uniqid";
 import { Query } from "@apollo/client/react/components";
-import { gql } from "@apollo/client";
 import { GET_CURRENCIES } from "../queries/queries";
+import { connect } from "react-redux";
+import { updatePrice } from "../redux/actionType";
 
 const CurrencyOptionsWrapper = styled.div`
   background-image: url(${selectArrowDown});
@@ -63,8 +64,8 @@ const Label = styled.label`
 
 class CurrencySelector extends Component {
   state = {
-    label: "",
-    symbol: "",
+    label: "USD",
+    symbol: "$",
   };
 
   onChangeHandler = (e, data) => {
@@ -76,6 +77,7 @@ class CurrencySelector extends Component {
   componentDidUpdate(prevProps, prevState) {
     if (prevState.label !== this.state.label) {
       this.props.getSelectedCurrency(this.state);
+      this.props.updatePrice({ ...this.state });
     }
   }
 
@@ -87,52 +89,52 @@ class CurrencySelector extends Component {
             if (loading) return <p>loading...</p>;
             if (error) console.log(error.message);
 
-            // console.log(data);
-            let currencies;
             if (data) {
-              currencies = data.currencies;
-            }
-            const [renderedSymbol] = currencies.filter((i) =>
-              i.label === this.state.label ? i : null
-            );
-            return (
-              <Label htmlFor="currency">
-                {renderedSymbol ? renderedSymbol.symbol : "$"}
-                <CurrencyOptionsWrapper>
-                  <SelectCurrency
-                    id="currency"
-                    name="label"
-                    value={this.state.label}
-                    onChange={(e) => this.onChangeHandler(e, currencies)}
-                  >
-                    <CurrencyOptions
-                      value=""
+              const currencies = data.currencies;
+              const [renderedSymbol] = currencies.filter((i) =>
+                i.label === this.state.label ? i : null
+              );
+              return (
+                <Label htmlFor="currency">
+                  {renderedSymbol ? renderedSymbol.symbol : "$"}
+                  <CurrencyOptionsWrapper>
+                    <SelectCurrency
+                      id="currency"
                       name="label"
-                      disabled
-                    ></CurrencyOptions>
-                    {currencies.map((currency) => {
-                      return (
-                        <CurrencyOptions
-                          key={uniqid()}
-                          name="label"
-                          value={currency.label}
-                        >
-                          {currency.symbol}
-                          {currency.label}
-                        </CurrencyOptions>
-                      );
-                    })}
-                  </SelectCurrency>
-                </CurrencyOptionsWrapper>
-              </Label>
-            );
+                      value={this.state.label}
+                      onChange={(e) => this.onChangeHandler(e, currencies)}
+                    >
+                      <CurrencyOptions
+                        value=""
+                        name="label"
+                        disabled
+                      ></CurrencyOptions>
+                      {currencies.map((currency) => {
+                        return (
+                          <CurrencyOptions
+                            key={uniqid()}
+                            name="label"
+                            value={currency.label}
+                          >
+                            {currency.symbol}
+                            {currency.label}
+                          </CurrencyOptions>
+                        );
+                      })}
+                    </SelectCurrency>
+                  </CurrencyOptionsWrapper>
+                </Label>
+              );
+            }
           }}
         </Query>
       </>
     );
-
-    // const { currencies } = currencyData;
   }
 }
 
-export default CurrencySelector;
+const mapDispactchToProps = (dispatch) => {
+  return { updatePrice: (currency) => dispatch(updatePrice(currency)) };
+};
+
+export default connect(null, mapDispactchToProps)(CurrencySelector);

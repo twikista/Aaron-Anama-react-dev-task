@@ -3,6 +3,7 @@ import {
   INCREASE_AMOUNT,
   DECREASE_AMOUNT,
   SUM_CART_AMOUNT,
+  UPDATE_PRICE,
 } from "./actions";
 
 const addToCart = (payload) => {
@@ -21,4 +22,14 @@ const sumCartAmount = () => {
   return { type: SUM_CART_AMOUNT };
 };
 
-export { addToCart, increaseAmount, decreaseAmount, sumCartAmount };
+const updatePrice = (payload) => {
+  return { type: UPDATE_PRICE, payload };
+};
+
+export {
+  addToCart,
+  increaseAmount,
+  decreaseAmount,
+  sumCartAmount,
+  updatePrice,
+};
