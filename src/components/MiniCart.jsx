@@ -124,7 +124,7 @@ const LinkWrapper = styled(Link)`
   text-decoration: none;
 `;
 
-class Minicart extends Component {
+class MiniCart extends Component {
   render() {
     const { amount, tax, total, cart, currencyDetails } = this.props.state;
     const { symbol } = currencyDetails;
@@ -138,7 +138,7 @@ class Minicart extends Component {
             </CartHeading>
           </CartHeader>
           <MinicartItems
-            currentCurrency={this.props.currentCurrency}
+            // currentCurrency={this.props.currentCurrency}
             cart={cart}
           />
           <CartTotal>
@@ -165,4 +165,4 @@ const mapStateToProps = (state) => {
   return { state: state };
 };
 
-export default connect(mapStateToProps)(Minicart);
+export default connect(mapStateToProps)(MiniCart);

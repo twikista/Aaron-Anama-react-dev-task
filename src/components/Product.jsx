@@ -234,10 +234,11 @@ class Product extends Component {
                             {/* <ProductPrice>$50.00</ProductPrice> */}
                             <Price
                               prices={data.product.prices}
-                              currentCurrency={this.props.currentCurrency}
+                              // currentCurrency={this.props.currentCurrency}
                               fontWeight="700"
                               fontSize="24px"
                               lineHeight="18px"
+                              // activePrice={activePrice}
                             />
                           </ProductPriceWrapper>
                           <AddToCartButton

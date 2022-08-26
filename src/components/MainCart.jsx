@@ -94,7 +94,7 @@ class MainCart extends Component {
       <MainCartContainer>
         <CartHeading>cart</CartHeading>
         <MainCartItems
-          currentCurrency={this.props.currentCurrency}
+          // currentCurrency={this.props.currentCurrency}
           cart={cart}
         />
         <CartTotalWrapper>

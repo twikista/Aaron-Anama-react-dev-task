@@ -1,6 +1,6 @@
-import { Component } from "react";
+import React, { Component } from "react";
 import styled from "styled-components";
-import Minicart from "./Minicart";
+import MiniCart from "./MiniCart";
 
 const Overlay = styled.section`
   position: absolute;
@@ -14,12 +14,17 @@ const Overlay = styled.section`
 `;
 
 class CartOverlay extends Component {
+  closeOnOverLayClick = (e) => {
+    if (e.currentTarget !== e.target) return;
+    this.props.overLayToggler();
+  };
+
   render() {
     return (
       <>
         {this.props.isOpen && (
-          <Overlay>
-            <Minicart {...this.props} />
+          <Overlay onClick={this.closeOnOverLayClick}>
+            <MiniCart {...this.props} />
           </Overlay>
         )}
       </>

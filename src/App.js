@@ -10,25 +10,27 @@ import { connect } from "react-redux";
 import { sumCartAmount } from "./redux/actionType";
 
 class App extends Component {
-  state = { currentCurrency: "USD", symbol: "$", open: false };
-  getSelectedCurrency = (currency) => {
-    this.setState({
-      ...this.state,
-      currentCurrency: currency.label,
-      symbol: currency.symbol,
-    });
-    // console.log(this.state);
-  };
+  state = { open: false };
+  // getSelectedCurrency = (currency) => {
+  //   this.setState({
+  //     ...this.state,
+  //     currentCurrency: currency.label,
+  //     symbol: currency.symbol,
+  //   });
+  //   // console.log(this.state);
+  // };
 
-  overLayToggler = () => {
+  overLayToggler = (e) => {
+    // e.stopPropagation();
     this.setState((prevState) => {
       return { ...this.state, open: !prevState.open };
     });
   };
 
   setCurrentPrice = (pricesArray) => {
+    const currentCurrency = this.props.state.currencyDetails.label;
     const activePrice = pricesArray.find(
-      (price) => price.currency.label === `${this.state.currentCurrency}`
+      (price) => price.currency.label === currentCurrency
     );
     return activePrice;
   };
@@ -45,11 +47,11 @@ class App extends Component {
     return (
       <div className="App">
         <Header
-          getSelectedCurrency={this.getSelectedCurrency}
+          // getSelectedCurrency={this.getSelectedCurrency}
           overLayToggler={this.overLayToggler}
         />
         <Main
-          currentCurrency={this.state}
+          // currentCurrency={this.state}
           setCurrentPrice={this.setCurrentPrice}
           isOpen={this.state.open}
           overLayToggler={this.overLayToggler}
@@ -61,7 +63,7 @@ class App extends Component {
               path="/:category"
               element={
                 <Products
-                  currentCurrency={this.state}
+                  // currentCurrency={this.state}
                   isOpen={this.state.open}
                   setCurrentPrice={this.setCurrentPrice}
                 />
@@ -80,7 +82,7 @@ class App extends Component {
               path="/:category/:product"
               element={
                 <Product
-                  currentCurrency={this.state}
+                  // currentCurrency={this.state}
                   setCurrentPrice={this.setCurrentPrice}
                 />
               }
@@ -93,8 +95,8 @@ class App extends Component {
               path="/cart"
               element={
                 <MainCart
-                  currentCurrency={this.state}
-                  setCurrentPrice={this.setCurrentPrice}
+                // currentCurrency={this.state}
+                // setCurrentPrice={this.setCurrentPrice}
                 />
               }
             />

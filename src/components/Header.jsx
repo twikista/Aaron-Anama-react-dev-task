@@ -1,9 +1,8 @@
 import { Component } from "react";
 import Categories from "./Categories";
-import CurrencySelector from "./CurrencySelector";
-import CartBadge from "./CartBadge";
 import styled from "styled-components";
 import logo from "../assets/logo.png";
+import ActionItems from "./NavActionItems";
 
 const AppHeader = styled.header`
   width: 100%;
@@ -58,10 +57,11 @@ class Header extends Component {
             <Logo src={logo} />
           </LogoContainer>
           <Action>
-            <CurrencySelector
-              getSelectedCurrency={this.props.getSelectedCurrency}
-            />
-            <CartBadge {...this.props} />
+            <ActionItems {...this.props} />
+            {/* <CurrencySelector
+              // getSelectedCurrency={this.props.getSelectedCurrency}
+            /> */}
+            {/* <CartBadge {...this.props} /> */}
           </Action>
         </HeaderWrapper>
       </AppHeader>

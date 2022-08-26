@@ -1,5 +1,6 @@
 import { Component } from "react";
 import styled from "styled-components";
+import { connect } from "react-redux";
 
 const ProductPrice = styled.span`
   font-weight: ${(props) => props.fontWeight};
@@ -17,21 +18,25 @@ const ProductPrice = styled.span`
 class Price extends Component {
   render() {
     const { prices, fontWeight, fontSize, lineHeight } = this.props;
-    const { currentCurrency, symbol } = this.props.currentCurrency;
-    const activeCurrency = prices.find(
-      (i) => i.currency.label === `${currentCurrency}`
-    );
+    // const { currentCurrency, symbol } = this.props.currentCurrency;
+    const { label } = this.props.currencyDetails;
+    const activePrice = prices.find((i) => i.currency.label === label);
+    // const activePrice = this.props.activePrice;
     return (
       <ProductPrice
         fontWeight={fontWeight}
         fontSize={fontSize}
         lineHeight={lineHeight}
       >
-        {activeCurrency.currency.symbol}
-        {activeCurrency.amount}
+        {activePrice.currency.symbol}
+        {activePrice.amount}
       </ProductPrice>
     );
   }
 }
 
-export default Price;
+const mapStateToProps = (state) => {
+  return { currencyDetails: state.currencyDetails };
+};
+
+export default connect(mapStateToProps)(Price);

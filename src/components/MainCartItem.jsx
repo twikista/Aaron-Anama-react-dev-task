@@ -116,7 +116,7 @@ class MainCartItem extends Component {
               </CartItemPrice> */}
             <Price
               prices={item.prices}
-              currentCurrency={this.props.currentCurrency}
+              // currentCurrency={this.props.currentCurrency}
               fontWeight="700"
               fontSize="24px"
               lineHeight="24px"

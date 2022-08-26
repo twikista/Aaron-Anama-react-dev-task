@@ -21,7 +21,7 @@ class MainCartItems extends Component {
             <MainCartItem
               key={item.id}
               item={item}
-              currentCurrency={this.props.currentCurrency}
+              // currentCurrency={this.props.currentCurrency}
             />
           ))
         ) : (

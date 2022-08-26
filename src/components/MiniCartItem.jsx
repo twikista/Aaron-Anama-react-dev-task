@@ -54,7 +54,6 @@ const styles = {
   },
 };
 
-
 class MiniCartItem extends Component {
   render() {
     const { item } = this.props;
@@ -78,7 +77,7 @@ class MiniCartItem extends Component {
               </CartItemPrice> */}
             <Price
               prices={item.prices}
-              currentCurrency={this.props.currentCurrency}
+              // currentCurrency={this.props.currentCurrency}
               fontWeight="500"
               fontSize="16px"
               lineHeight="26px"

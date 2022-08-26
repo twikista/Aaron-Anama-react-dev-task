@@ -111,7 +111,7 @@ class ProductCard extends Component {
     const { name, inStock, gallery, prices, id, attributes } =
       this.props.product;
     const activeCategory = this.props.activeCategory;
-    const { currentCurrency } = this.props.currentCurrency;
+    // const { currentCurrency } = this.props.currentCurrency;
     const activePrice = this.props.setCurrentPrice(prices);
     const content = (
       <Container>
@@ -120,11 +120,12 @@ class ProductCard extends Component {
           <ProductName>{name}</ProductName>
           {/* <ProductPrice>$50.58</ProductPrice> */}
           <Price
-            prices={this.props.product.prices}
-            currentCurrency={this.props.currentCurrency}
+            prices={prices}
+            // currentCurrency={this.props.currentCurrency}
             fontWeight="500"
             fontSize="18px"
             lineHeight="29px"
+            // activePrice={activePrice}
           />
         </CardContent>
       </Container>
