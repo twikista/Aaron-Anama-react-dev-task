@@ -8,13 +8,16 @@ import {
   UPDATE_PRICE,
 } from "./actions";
 import uniqid from "uniqid";
+import { loadStateFromLocalStorage } from "./localStoragePersist";
 
+const persistedState = loadStateFromLocalStorage();
 const initialState = {
   cart: [],
   total: 0,
   amount: 0,
   tax: 0,
   currencyDetails: { label: "USD", symbol: "$" },
+  persistedState,
 };
 
 const check = (a, b) => {

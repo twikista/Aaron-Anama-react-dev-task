@@ -13,6 +13,7 @@ const MainCartContainer = styled.article`
   margin-top: 80px;
   /* margin: 32px; */
   /* border: solid red 1px; */
+  padding-bottom: 42px;
 `;
 
 const CartHeading = styled.h2`
@@ -85,39 +86,52 @@ const OrderButton = styled.button`
   /* margin-top: 32px; */
 `;
 
+const EmptyCartMessage = styled.p`
+  font-size: 32px;
+  font-weight: 500;
+  text-align: center;
+`;
+
 class MainCart extends Component {
   render() {
     const { amount, tax, total, cart, currencyDetails } = this.props.state;
+    // let symbol;
     const { symbol } = currencyDetails;
     // console.log(this.props.currentCurrency.currentCurrency, symbol);
     return (
       <MainCartContainer>
         <CartHeading>cart</CartHeading>
-        <MainCartItems
-          // currentCurrency={this.props.currentCurrency}
-          cart={cart}
-        />
-        <CartTotalWrapper>
-          <CartTotalItem>
-            <CartSubTotalLabel>tax 21%:</CartSubTotalLabel>
-            <CartTotalAmount>
-              {symbol}
-              {`${tax.toFixed(2)}`}
-            </CartTotalAmount>
-          </CartTotalItem>
-          <CartTotalItem>
-            <CartSubTotalLabel>quantity:</CartSubTotalLabel>
-            <CartTotalAmount>{amount}</CartTotalAmount>
-          </CartTotalItem>
-          <CartTotalItem>
-            <CartTotalLabel>total:</CartTotalLabel>
-            <CartTotalAmount>
-              {symbol}
-              {`${total.toFixed(2)}`}
-            </CartTotalAmount>
-          </CartTotalItem>
-          <OrderButton>order</OrderButton>
-        </CartTotalWrapper>
+        {cart.length ? (
+          <>
+            <MainCartItems
+              // currentCurrency={this.props.currentCurrency}
+              cart={cart}
+            />
+            <CartTotalWrapper>
+              <CartTotalItem>
+                <CartSubTotalLabel>tax 21%:</CartSubTotalLabel>
+                <CartTotalAmount>
+                  {symbol}
+                  {`${tax.toFixed(2)}`}
+                </CartTotalAmount>
+              </CartTotalItem>
+              <CartTotalItem>
+                <CartSubTotalLabel>quantity:</CartSubTotalLabel>
+                <CartTotalAmount>{amount}</CartTotalAmount>
+              </CartTotalItem>
+              <CartTotalItem>
+                <CartTotalLabel>total:</CartTotalLabel>
+                <CartTotalAmount>
+                  {symbol}
+                  {`${total.toFixed(2)}`}
+                </CartTotalAmount>
+              </CartTotalItem>
+              <OrderButton>order</OrderButton>
+            </CartTotalWrapper>
+          </>
+        ) : (
+          <EmptyCartMessage>{`There are ${cart.length} items in your cart. Add items`}</EmptyCartMessage>
+        )}
       </MainCartContainer>
     );
   }

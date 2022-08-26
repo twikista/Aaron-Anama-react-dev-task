@@ -127,14 +127,15 @@ const LinkWrapper = styled(Link)`
 class MiniCart extends Component {
   render() {
     const { amount, tax, total, cart, currencyDetails } = this.props.state;
-    const { symbol } = currencyDetails;
+    let symbol;
+    if (currencyDetails) symbol = currencyDetails.symbol;
     return (
       <MiniCartContainer>
         <CartTop>
           <CartHeader>
             <CartHeading>
               my bag, &nbsp;
-              <HeadingSpan>3 items</HeadingSpan>
+              <HeadingSpan>{amount} items</HeadingSpan>
             </CartHeading>
           </CartHeader>
           <MinicartItems

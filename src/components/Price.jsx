@@ -19,19 +19,21 @@ class Price extends Component {
   render() {
     const { prices, fontWeight, fontSize, lineHeight } = this.props;
     // const { currentCurrency, symbol } = this.props.currentCurrency;
-    const { label } = this.props.currencyDetails;
-    const activePrice = prices.find((i) => i.currency.label === label);
-    // const activePrice = this.props.activePrice;
-    return (
-      <ProductPrice
-        fontWeight={fontWeight}
-        fontSize={fontSize}
-        lineHeight={lineHeight}
-      >
-        {activePrice.currency.symbol}
-        {activePrice.amount}
-      </ProductPrice>
-    );
+    if (this.props.currencyDetails) {
+      const { label } = this.props.currencyDetails;
+      const activePrice = prices.find((i) => i.currency.label === label);
+      // const activePrice = this.props.activePrice;
+      return (
+        <ProductPrice
+          fontWeight={fontWeight}
+          fontSize={fontSize}
+          lineHeight={lineHeight}
+        >
+          {activePrice.currency.symbol}
+          {activePrice.amount}
+        </ProductPrice>
+      );
+    }
   }
 }
 

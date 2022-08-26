@@ -100,11 +100,13 @@ const CurrencySymbol = styled.span`
 `;
 
 class ActionItems extends Component {
-  state = {
-    label: "USD",
-    symbol: "$",
+  initialState = {
+    label: this.props.currencyDetails.label,
+    symbol: this.props.currencyDetails.symbol,
     isOpen: false,
   };
+
+  state = this.initialState;
 
   dropDownRef = React.createRef(null);
 
@@ -112,8 +114,12 @@ class ActionItems extends Component {
     e.stopPropagation();
     this.setState({ ...this.state, isOpen: !this.state.isOpen });
   };
-  onChangeHandler = (label, symbol) => {
-    this.setState({ label, symbol, isOpen: !this.state.isOpen });
+  onChangeHandler = (currencyLabel, currencySymbol) => {
+    this.setState({
+      label: currencyLabel,
+      symbol: currencySymbol,
+      isOpen: !this.state.isOpen,
+    });
   };
 
   closeDropDownListener = (e) => {
@@ -209,8 +215,12 @@ class ActionItems extends Component {
   }
 }
 
+const mapStateToProps = (state) => {
+  return { currencyDetails: state.currencyDetails };
+};
+
 const mapDispactchToProps = (dispatch) => {
   return { updatePrice: (currency) => dispatch(updatePrice(currency)) };
 };
 
-export default connect(null, mapDispactchToProps)(ActionItems);
+export default connect(mapStateToProps, mapDispactchToProps)(ActionItems);

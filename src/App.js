@@ -28,11 +28,13 @@ class App extends Component {
   };
 
   setCurrentPrice = (pricesArray) => {
-    const currentCurrency = this.props.state.currencyDetails.label;
-    const activePrice = pricesArray.find(
-      (price) => price.currency.label === currentCurrency
-    );
-    return activePrice;
+    if (this.props.state.currencyDetails) {
+      const currentCurrency = this.props.state.currencyDetails.label;
+      const activePrice = pricesArray.find(
+        (price) => price.currency.label === currentCurrency
+      );
+      return activePrice;
+    }
   };
 
   componentDidUpdate(prevProps, prevState) {

@@ -16,17 +16,13 @@ class MainCartItems extends Component {
     console.log(cart);
     return (
       <CartItemsContainer gap={gap} width={width} maxHeight={maxHeight}>
-        {cart.length ? (
-          cart.map((item) => (
-            <MainCartItem
-              key={item.id}
-              item={item}
-              // currentCurrency={this.props.currentCurrency}
-            />
-          ))
-        ) : (
-          <p>{`There are ${cart.length} items in your cart. Add items`}</p>
-        )}
+        {cart.map((item) => (
+          <MainCartItem
+            key={item.id}
+            item={item}
+            // currentCurrency={this.props.currentCurrency}
+          />
+        ))}
       </CartItemsContainer>
     );
   }

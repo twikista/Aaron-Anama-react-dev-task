@@ -6,11 +6,22 @@ import { BrowserRouter } from "react-router-dom";
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import { Provider } from "react-redux";
 import store from "./redux/store";
+import { saveStateToLocalStorage } from "./redux/localStoragePersist";
 
 //apolloclient instance
 const client = new ApolloClient({
   uri: "http://localhost:4000/",
   cache: new InMemoryCache(),
+});
+
+store.subscribe(() => {
+  saveStateToLocalStorage({
+    cart: store.getState().cart,
+    total: store.getState().total,
+    amount: store.getState().amount,
+    tax: store.getState().tax,
+    currencyDetails: store.getState().currencyDetails,
+  });
 });
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
