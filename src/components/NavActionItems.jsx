@@ -137,7 +137,10 @@ class ActionItems extends Component {
   componentDidUpdate(prevProps, prevState) {
     if (prevState.label !== this.state.label) {
       // this.props.getSelectedCurrency(this.state);
-      this.props.updatePrice({ ...this.state });
+      this.props.updatePrice({
+        label: this.state.label,
+        symbol: this.state.symbol,
+      });
     }
   }
 

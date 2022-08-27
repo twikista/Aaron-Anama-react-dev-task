@@ -10,6 +10,7 @@ import { GET_PRODUCT } from "../queries/queries";
 import { Query } from "@apollo/client/react/components";
 import { connect } from "react-redux";
 import { addToCart } from "../redux/actionType";
+import ValidationModal from "./ValidationModal";
 
 const Container = styled.section`
   display: grid;
@@ -253,6 +254,7 @@ class Product extends Component {
             }}
           </Query>
         }
+        <ValidationModal />
       </>
     );
   }

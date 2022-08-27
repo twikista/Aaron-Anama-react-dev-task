@@ -1,16 +1,15 @@
-import { legacy_createStore } from "redux";
+import { legacy_createStore, applyMiddleware, compose } from "redux";
 import reducer from "./reducer";
-import {
-  loadStateFromLocalStorage,
-  saveStateToLocalStorage,
-} from "./localStoragePersist";
+import { loadStateFromLocalStorage } from "./localStoragePersist";
+import { validateAttributesMiddleware } from "../middleware/validateAttributesMiddleware";
 
 const persistedState = loadStateFromLocalStorage();
+const storeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const store = legacy_createStore(
   reducer,
   persistedState,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  storeEnhancers(applyMiddleware(validateAttributesMiddleware))
 );
 console.log(store);
 

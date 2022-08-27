@@ -30,17 +30,6 @@ const CartTop = styled.div`
   /* border: solid 2px orchid; */
 `;
 
-// const MiniCartItems = styled.div`
-//     display: flex;
-//     flex-direction: column;
-//     /* align-items: flex-start; */
-//     gap:40px;
-//     width: 293px;
-//     max-height: 420px;
-//     /* border:solid 2px tomato; */
-//     overflow:hidden scroll;
-// `;
-
 const CartHeader = styled.div`
   /* margin-bottom: 32px; */
 `;

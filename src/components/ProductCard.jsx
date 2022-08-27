@@ -11,14 +11,12 @@ import uniqid from "uniqid";
 const CardWrapper = styled.article`
   width: calc(386px - 20px);
   height: 444px;
-  /* flex: calc(1 - 500px); */
   padding: 16px;
   background-color: #ffffff;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  /* border: solid 1px red; */
   position: relative;
   cursor: pointer;
   &:not(:last-child) {

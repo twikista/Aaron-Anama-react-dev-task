@@ -4,6 +4,8 @@ import {
   DECREASE_AMOUNT,
   SUM_CART_AMOUNT,
   UPDATE_PRICE,
+  DISPLAY_VALIDATION_MESSAGE,
+  CLOSE_VALIDATION_MESSAGE,
 } from "./actions";
 import { loadStateFromLocalStorage } from "./localStoragePersist";
 import {
@@ -18,15 +20,16 @@ const initialState = {
   amount: 0,
   tax: 0,
   currencyDetails: { label: "USD", symbol: "$" },
+  showValidationModal: false,
   persistedState,
 };
 
 const reducer = (state = initialState, action) => {
   if (action.type === ADD_TO_CART) {
     //check if attribute(s) is selected for item to be added to cart
-    const isAttributedSelected =
-      Object.keys(action.payload.selectedAttributes).length ===
-      action.payload.attributes.length;
+    // const isAttributedSelected =
+    //   Object.keys(action.payload.selectedAttributes).length ===
+    //   action.payload.attributes.length;
 
     //check if cart is empty
     if (state.cart.length) {
@@ -85,17 +88,13 @@ const reducer = (state = initialState, action) => {
       } else {
         console.log("items are not the same");
         // add item to cart if it does not already exist in cart
-        return isAttributedSelected
-          ? { ...state, cart: [...state.cart, action.payload] }
-          : { ...state };
+        return { ...state, cart: [...state.cart, action.payload] };
       }
       // console.log(attributeValues, item);
     }
     console.log("empty cart");
     //add item to empty cart
-    return isAttributedSelected
-      ? { ...state, cart: [...state.cart, action.payload] }
-      : console.log("please select attributes");
+    return { ...state, cart: [...state.cart, action.payload] };
   }
 
   if (action.type === INCREASE_AMOUNT) {
@@ -146,6 +145,15 @@ const reducer = (state = initialState, action) => {
 
     return { ...state, currencyDetails: action.payload, cart: tempCart };
   }
+
+  if (action.type === DISPLAY_VALIDATION_MESSAGE) {
+    return { ...state, showValidationModal: true };
+  }
+
+  if (action.type === CLOSE_VALIDATION_MESSAGE) {
+    return { ...state, showValidationModal: false };
+  }
+
   console.log(state);
   return state;
 };
