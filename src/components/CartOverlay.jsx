@@ -10,6 +10,7 @@ const Overlay = styled.section`
   right: 0;
   background: rgba(57, 55, 72, 0.22);
   z-index: 19;
+  width: 100%;
   /* display: none; */
 `;
 

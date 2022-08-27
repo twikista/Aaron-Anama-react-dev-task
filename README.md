@@ -1,70 +1,65 @@
-# Getting Started with Create React App
+# Frontend Implementation of GraphQL E-commerce server
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is a frontend implentation of a GraphQL based e-commerce server. The application's UI is implemented with React. Apollo Client is used to make remote calls to server and manage general UI state. Redux is used to manage cart state. Local Storage is used to persist Redux state.
 
-## Available Scripts
+## Table of contents
 
-In the project directory, you can run:
+- [Features](#implemented-features)
+- [Tecnology used](#technology-used)
+- [Tools](#tools)
+- [Setup](#setup)
+- [Usage](#usage)
+- [Acknowledgment](#acknowledgement)
 
-### `npm start`
+## Implemented Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- A particular item can be added to cart only once. Subsequent click of the 'add to cart' button increase the amount of the item in cart
+- Decreasing cart item amount below 1 removes the item from cart
+- items can be added to cart only when attributes are selected (except where item does not have any attribute)
+- Total amount of items in cart are dynamcally displayed on cart badge
+- Minicart overlay can be closed on click outside the minicart
+- Items that are out of stock are not clickable
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Technology Used
 
-### `npm test`
+- React
+- Apollo Client
+- Redux
+- React Router
+- Styled Compnents
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 3rd Party Libraries
 
-### `npm run build`
+- uniqid
+- html-react-parser
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Tools
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- create-react-app
+- git & github
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Setup
 
-### `npm run eject`
+To run this application locally:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+1. Get the GraphQL endpoint and the instruction to launch it from [end point](https://github.com/scandiweb/junior-react-endpoint)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+2. Clone this repo
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```bash
+$ git clone https://github.com/twikista/aaron-anama-react-dev-task.git
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+3. Go the root of the cloned repo and install dependencies
 
-## Learn More
+```bash
+$ cd aaron-anama-react-dev-task && npm install
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Usage
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+To start the application, run ` npm start` to start the development server at http://localhost:3000/
 
-### Code Splitting
+## Acknowledgement
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- [Scandiweb](https://fonts.google.com)

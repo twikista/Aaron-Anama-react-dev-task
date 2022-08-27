@@ -6,6 +6,7 @@ import withRouter from "./NavParamsHOC";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { addToCart } from "../redux/actionType";
+import uniqid from "uniqid";
 
 const CardWrapper = styled.article`
   width: calc(386px - 20px);
@@ -143,6 +144,7 @@ class ProductCard extends Component {
                 onClick={() =>
                   this.props.addToCart({
                     ...this.props.product,
+                    id: uniqid(),
                     selectedAttributes: this.state.selectedAtrributes,
                     amount: 1,
                     activePrice: activePrice,

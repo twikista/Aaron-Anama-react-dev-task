@@ -1,6 +1,5 @@
 import { Component } from "react";
 import styled from "styled-components";
-import { item } from "../data";
 import uniqid from "uniqid";
 import ProductAttributes from "./ProductAtrributes";
 import ProductName from "./ProductName";
@@ -51,11 +50,6 @@ const ProductImage = styled.img`
   height: 100%;
 `;
 
-const ProductNameWrapper = styled.div`
-  width: 100%;
-  margin-bottom: 43px;
-`;
-
 const ProductDetails = styled.article`
   width: 292px;
   height: 595px;
@@ -103,15 +97,6 @@ const ProductDesriptionWrapper = styled.div`
   width: 100%;
   height: 103px;
   margin-top: 40px;
-  font-family: "Roboto";
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 159.96%;
-  height: 103px;
-  overflow-y: scroll;
-`;
-
-const ProductDescription = styled.p`
   font-family: "Roboto";
   font-weight: 400;
   font-size: 16px;
@@ -245,6 +230,7 @@ class Product extends Component {
                             onClick={() =>
                               this.props.addToCart({
                                 ...data.product,
+                                id: uniqid(),
                                 selectedAttributes:
                                   this.state.selectedAttributes,
                                 amount: 1,
