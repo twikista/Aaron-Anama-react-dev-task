@@ -1,6 +1,6 @@
 # Frontend Implementation of GraphQL E-commerce server
 
-This project is a frontend implentation of a GraphQL based e-commerce server. The application's UI is implemented with React. Apollo Client is used to make remote calls to server and manage general UI state. Redux is used to manage cart state. Local Storage is used to persist Redux state.
+This project is a frontend implentation of a GraphQL based e-commerce server. The application's UI is implemented with React, while Apollo Client is used to make remote calls to server and manage general UI state. Moreover, Redux and Local Storage are used to manage cart state and persist Redux state respectively.
 
 ## Table of contents
 
@@ -9,6 +9,7 @@ This project is a frontend implentation of a GraphQL based e-commerce server. Th
 - [Tools](#tools)
 - [Setup](#setup)
 - [Usage](#usage)
+- [Motivation](#motivation)
 - [Acknowledgment](#acknowledgement)
 
 ## Implemented Features
@@ -60,6 +61,10 @@ $ cd aaron-anama-react-dev-task && npm install
 
 To start the application, run ` npm start` to start the development server at http://localhost:3000/
 
+## Motivation
+
+- [Scandiweb](https://careers.scandiweb.com)
+
 ## Acknowledgement
 
-- [Scandiweb](https://fonts.google.com)
+- [Scandiweb](https://careers.scandiweb.com)
