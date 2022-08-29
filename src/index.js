@@ -10,7 +10,7 @@ import { saveStateToLocalStorage } from "./redux/localStoragePersist";
 
 //apolloclient instance
 const client = new ApolloClient({
-  uri: "http://localhost:4000/",
+  uri: process.env.REACT_APP_GRAPHQL_SERVER,
   cache: new InMemoryCache(),
 });
 

@@ -9,11 +9,6 @@ const compareAttributes = (
     existingCartItemAttributes.every((item) =>
       incomingCartItemAttributes.includes(item)
     );
-  console.log(
-    incomingCartItemAttributes,
-    existingCartItemAttributes,
-    outcomeOfComapare
-  );
   return outcomeOfComapare;
 };
 

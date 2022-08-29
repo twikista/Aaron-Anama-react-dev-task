@@ -1,6 +1,6 @@
 import { Component } from "react";
 import styled from "styled-components";
-import MainCartItems from "./MainCartItems";
+import MainCartItems from "../cart/MainCartItems";
 import { connect } from "react-redux";
 
 const MainCartContainer = styled.article`
@@ -11,8 +11,6 @@ const MainCartContainer = styled.article`
   color: #1d1f22;
   font-family: "Raleway";
   margin-top: 80px;
-  /* margin: 32px; */
-  /* border: solid red 1px; */
   padding-bottom: 42px;
 `;
 
@@ -60,12 +58,6 @@ const CartSubTotalLabel = styled(CartTotalAmount)`
   width: 200px;
 `;
 
-const Label = styled.p`
-  font-weight: 400;
-  font-size: 24px;
-  line-height: 28px;
-`;
-
 const OrderButton = styled.button`
   display: flex;
   align-items: center;
@@ -83,7 +75,6 @@ const OrderButton = styled.button`
   font-family: "Raleway", sans-serif;
   border: none;
   outline: none;
-  /* margin-top: 32px; */
 `;
 
 const EmptyCartMessage = styled.p`
@@ -95,18 +86,13 @@ const EmptyCartMessage = styled.p`
 class MainCart extends Component {
   render() {
     const { amount, tax, total, cart, currencyDetails } = this.props.state;
-    // let symbol;
     const { symbol } = currencyDetails;
-    // console.log(this.props.currentCurrency.currentCurrency, symbol);
     return (
       <MainCartContainer>
         <CartHeading>cart</CartHeading>
         {cart.length ? (
           <>
-            <MainCartItems
-              // currentCurrency={this.props.currentCurrency}
-              cart={cart}
-            />
+            <MainCartItems cart={cart} />
             <CartTotalWrapper>
               <CartTotalItem>
                 <CartSubTotalLabel>tax 21%:</CartSubTotalLabel>

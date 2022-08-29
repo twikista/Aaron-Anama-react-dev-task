@@ -1,9 +1,6 @@
 import { Component } from "react";
 import styled from "styled-components";
 
-//fs, fw, lh, clr
-//container - mb
-
 const ProductNameWrapper = styled.div`
   width: 100%;
   margin-bottom: ${(props) => props.marginBottom}; //optional

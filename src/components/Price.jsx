@@ -8,21 +8,12 @@ const ProductPrice = styled.span`
   line-height: ${(props) => props.lineHeight};
 `;
 
-// const ProductPrice = styled.span`
-//   font-weight: 700;
-//   font-size: 24px;
-//   line-height: 18px;
-// `;
-// const selectedCurrency = "USD";
-
 class Price extends Component {
   render() {
     const { prices, fontWeight, fontSize, lineHeight } = this.props;
-    // const { currentCurrency, symbol } = this.props.currentCurrency;
     if (this.props.currencyDetails) {
       const { label } = this.props.currencyDetails;
       const activePrice = prices.find((i) => i.currency.label === label);
-      // const activePrice = this.props.activePrice;
       return (
         <ProductPrice
           fontWeight={fontWeight}

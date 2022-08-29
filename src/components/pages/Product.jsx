@@ -1,23 +1,22 @@
 import { Component } from "react";
 import styled from "styled-components";
 import uniqid from "uniqid";
-import ProductAttributes from "./ProductAtrributes";
-import ProductName from "./ProductName";
-import Price from "./Price";
+import ProductAttributes from "../ProductAtrributes";
+import ProductName from "../ProductName";
+import Price from "../Price";
 import parse from "html-react-parser";
-import withRouter from "./NavParamsHOC";
-import { GET_PRODUCT } from "../queries/queries";
+import withRouter from "../utility/NavParamsHOC";
+import { GET_PRODUCT } from "../../queries/queries";
 import { Query } from "@apollo/client/react/components";
 import { connect } from "react-redux";
-import { addToCart } from "../redux/actionType";
-import ValidationModal from "./ValidationModal";
+import { addToCart } from "../../redux/actionType";
+import ValidationModal from "../ValidationModal";
 
 const Container = styled.section`
   display: grid;
   grid-template-columns: 80px 1fr;
   grid-template-rows: 1fr;
   column-gap: 40px;
-  /* padding-top: ; */
 `;
 
 const ImageThumbNails = styled.article`
@@ -152,22 +151,22 @@ class Product extends Component {
     });
   };
 
-  componentDidMount() {
-    // console.log(this.state);
-  }
-
   render() {
     const id = this.props.params.product;
+
     return (
       <>
         {
           <Query query={GET_PRODUCT} variables={{ id }}>
             {({ loading, error, data }) => {
+              if (loading) return <p>loading...</p>;
+              if (error) console.log(error);
               if (data) {
-                const activePrice = this.props.setCurrentPrice(
-                  data.product.prices
+                const { label } = this.props.currencyDetails;
+                const activePrice = data.product.prices.find(
+                  (i) => i.currency.label === label
                 );
-                // console.log(data.product);
+
                 return (
                   <>
                     <Container>
@@ -217,14 +216,11 @@ class Product extends Component {
                           />
                           <ProductPriceWrapper>
                             <ProductpriceLabel>price</ProductpriceLabel>
-                            {/* <ProductPrice>$50.00</ProductPrice> */}
                             <Price
                               prices={data.product.prices}
-                              // currentCurrency={this.props.currentCurrency}
                               fontWeight="700"
                               fontSize="24px"
                               lineHeight="18px"
-                              // activePrice={activePrice}
                             />
                           </ProductPriceWrapper>
                           <AddToCartButton
@@ -250,7 +246,6 @@ class Product extends Component {
                   </>
                 );
               }
-              console.log(this.props);
             }}
           </Query>
         }
@@ -260,8 +255,15 @@ class Product extends Component {
   }
 }
 
+const mapStateToProps = (state) => {
+  return { currencyDetails: state.currencyDetails };
+};
+
 const mapDispatchToProps = (dispatch) => {
   return { addToCart: (product) => dispatch(addToCart(product)) };
 };
 
-export default connect(null, mapDispatchToProps)(withRouter(Product));
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRouter(Product));

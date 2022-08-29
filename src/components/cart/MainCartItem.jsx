@@ -1,9 +1,9 @@
 import { Component } from "react";
 import styled from "styled-components";
-import ProductAttributes from "./ProductAtrributes";
-import ProductName from "./ProductName";
-import Price from "./Price";
-import ProductImage from "./ProductImage";
+import ProductAttributes from "../ProductAtrributes";
+import ProductName from "../ProductName";
+import Price from "../Price";
+import ProductImage from "../ProductImage";
 import CartItemAmountControls from "./CartItemAmountControls";
 
 const CartItemContainer = styled.article`
@@ -15,7 +15,6 @@ const CartItemContainer = styled.article`
   border-bottom: 1px solid #e5e5e5;
   padding: 24px 0;
   min-height: 200px;
-  /* max-height: 288px; */
 `;
 
 const CartItemDetailsWrapper = styled.div`
@@ -25,18 +24,15 @@ const CartItemDetailsWrapper = styled.div`
   align-items: flex-start;
   justify-content: space-between;
   width: 279px;
-  /* border: solid green 1px; */
 `;
 
 const CartItemDetails = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  /* gap: ${(props) => props.itemGap}; //gap: 8px; */
   width: 279px;
   height: 100%;
   gap: 20px;
-  /* border: solid blue 1px; */
 `;
 
 const styles = {
@@ -82,13 +78,8 @@ class MainCartItem extends Component {
               spanFontWeight="400"
               item={item}
             />
-            {/* <CartItemPrice>
-                {prices[0].currency.symbol}
-                {prices[0].amount}
-              </CartItemPrice> */}
             <Price
               prices={item.prices}
-              // currentCurrency={this.props.currentCurrency}
               fontWeight="700"
               fontSize="24px"
               lineHeight="24px"
@@ -103,11 +94,6 @@ class MainCartItem extends Component {
               }
             />
           </CartItemDetails>
-          {/* <CartItemcontrols>
-            <AmountControlIcon src={`${plusIcon}`} alt="plus icon" />
-            <Amount>4</Amount>
-            <AmountControlIcon src={`${minusIcon}`} alt="minus icon" />
-          </CartItemcontrols> */}
           <CartItemAmountControls
             wrapperWidth="24px"
             iconHeight="24px"
@@ -118,7 +104,6 @@ class MainCartItem extends Component {
             id={item.id}
           />
         </CartItemDetailsWrapper>
-        {/* <CartItemRight url={`${gallery[0]}`} /> */}
         <ProductImage width="200px" gallery={gallery} />
       </CartItemContainer>
     );

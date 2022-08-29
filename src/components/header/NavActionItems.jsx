@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import CartBadge from "./CartBadge";
-import selectArrowDown from "../assets/select_arrow_down.svg";
-import selectArrowUp from "../assets/select_arrow_up.svg";
-import { GET_CURRENCIES } from "../queries/queries";
+import selectArrowDown from "../../assets/select_arrow_down.svg";
+import selectArrowUp from "../../assets/select_arrow_up.svg";
+import { GET_CURRENCIES } from "../../queries/queries";
 import { Query } from "@apollo/client/react/components";
 import uniqid from "uniqid";
 import { connect } from "react-redux";
-import { updatePrice } from "../redux/actionType";
+import { updatePrice } from "../../redux/actionType";
 
 const ActionContainer = styled.div`
   width: 114px;
@@ -136,7 +136,6 @@ class ActionItems extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (prevState.label !== this.state.label) {
-      // this.props.getSelectedCurrency(this.state);
       this.props.updatePrice({
         label: this.state.label,
         symbol: this.state.symbol,
@@ -157,7 +156,6 @@ class ActionItems extends Component {
               if (loading) return <p>loading...</p>;
               if (error) console.log(error.message);
               if (data) {
-                console.log(this.state);
                 const currencies = data.currencies;
                 const [renderedSymbol] = currencies.filter((i) =>
                   i.label === this.state.label ? i : null

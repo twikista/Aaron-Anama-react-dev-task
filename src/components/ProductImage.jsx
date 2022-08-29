@@ -10,7 +10,6 @@ const Image = styled.div`
   background-size: cover;
   background-repeat: no-repeat;
   position: relative;
-  /* border: solid yellow 1px; */
 `;
 
 const ImageControlWrapper = styled.div`
@@ -34,9 +33,7 @@ const CaretWrapper = styled.button`
   outline: none;
   cursor: pointer;
 `;
-const Caret = styled.img`
-  /* display: block; */
-`;
+const Caret = styled.img``;
 
 class ProductImage extends Component {
   state = {

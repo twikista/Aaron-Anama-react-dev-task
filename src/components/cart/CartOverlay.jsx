@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import MiniCart from "./MiniCart";
-import Overlay from "./Overlay";
+import Overlay from "../Overlay";
 
 class CartOverlay extends Component {
   closeOnOverLayClick = (e) => {

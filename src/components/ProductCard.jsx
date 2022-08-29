@@ -2,7 +2,6 @@ import { Component } from "react";
 import styled from "styled-components";
 import Price from "./Price";
 import addAproductIcon from "../assets/add_product_icon.svg";
-import withRouter from "./NavParamsHOC";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { addToCart } from "../redux/actionType";
@@ -84,7 +83,6 @@ const OutOfStockOverlay = styled(CardWrapper)`
 const WrappingLink = styled(Link)`
   text-decoration: none;
   position: relative;
-  /* z-index: 3; */
   width: 100%;
 `;
 
@@ -93,38 +91,25 @@ const Container = styled.div`
 `;
 
 class ProductCard extends Component {
-  // setInitaitalState = () => {
-  //   let defaultAttributes = {};
-  //   const attributes = this.props.product.attributes;
-  //   for (let i = 0; i < attributes.length; i++) {
-  //     const attribute = {
-  //       [attributes[i].name]: `${attributes[i].items[0].displayValue}`,
-  //     };
-  //     defaultAttributes = { ...defaultAttributes, ...attribute };
-  //   }
-  //   return defaultAttributes;
-  // };
   state = { selectedAtrributes: {} };
 
   render() {
     const { name, inStock, gallery, prices, id, attributes } =
       this.props.product;
     const activeCategory = this.props.activeCategory;
-    // const { currentCurrency } = this.props.currentCurrency;
-    const activePrice = this.props.setCurrentPrice(prices);
+    const { label } = this.props.currencyDetails;
+    const activePrice = prices.find((i) => i.currency.label === label);
+
     const content = (
       <Container>
         <ProductImage url={`${gallery[0]}`}></ProductImage>
         <CardContent>
           <ProductName>{name}</ProductName>
-          {/* <ProductPrice>$50.58</ProductPrice> */}
           <Price
             prices={prices}
-            // currentCurrency={this.props.currentCurrency}
             fontWeight="500"
             fontSize="18px"
             lineHeight="29px"
-            // activePrice={activePrice}
           />
         </CardContent>
       </Container>
@@ -162,8 +147,12 @@ class ProductCard extends Component {
   }
 }
 
+const mapStateToProps = (state) => {
+  return { currencyDetails: state.currencyDetails };
+};
+
 const mapDispatchToProps = (dispatch) => {
   return { addToCart: (product) => dispatch(addToCart(product)) };
 };
 
-export default connect(null, mapDispatchToProps)(withRouter(ProductCard));
+export default connect(mapStateToProps, mapDispatchToProps)(ProductCard);

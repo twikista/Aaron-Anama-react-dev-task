@@ -7,8 +7,6 @@ const AttributeWrapper = styled.div`
   align-items: flex-start;
   gap: 8px;
   width: ${(props) => props.width};
-  /* height: 48px; */
-  /* border: solid purple 1px; */
 `;
 const AttributeTitle = styled.h5`
   font-weight: ${(props) => props.fontwWight};
@@ -32,7 +30,6 @@ const Attributes = styled.div`
 
 const AttributeValue = styled.button`
   flex: 1;
-  /* max-height: ${(props) => props.width}; */
   width: 100%;
   height: 100%;
   display: inline-block;
@@ -49,7 +46,6 @@ const AttributeValue = styled.button`
   flex-wrap: wrap;
   cursor: pointer;
   appearance: none;
-  /* border: 1px solid ${(props) => props.border}; */
 
   &.active {
     background-color: #1d1f22;
@@ -70,8 +66,6 @@ const ColorAttributeValue = styled(AttributeValue)`
   }
 `;
 
-//[this.props.name]: `${this.props.items[0].displayValue}`
-
 class ProductAttribute extends Component {
   initialState = this.props.selectedAttributes
     ? this.props.selectedAttributes
@@ -80,24 +74,16 @@ class ProductAttribute extends Component {
   changeHandler = (e) => {
     const { name, value } = e.target;
     this.setState({ ...this.state, [name]: value });
-    // this.props.selectedAttributesHandler(this.state);
   };
 
   componentDidUpdate(prevProps, prevState) {
     if (prevState !== this.state) {
-      // this.props.attributesHandler(this.state);
       this.props.selectedAttributesHandler(this.state);
     }
   }
 
-  componentDidMount() {
-    // this.props.selectedAttributesHandler(this.state);
-  }
-
   render() {
-    console.log(this.state, this.initialState);
-
-    const { name, type, items, width, styles } = this.props;
+    const { name, type, items, styles } = this.props;
     const {
       attributeTitle,
       attributes,
@@ -130,16 +116,7 @@ class ProductAttribute extends Component {
                   onClick={() => this.setState({ [name]: displayValue })}
                   className={displayValue === this.state[name] ? "active" : ""}
                   disabled={this.props.disable ? true : false}
-                >
-                  {/* <AttributeRadioButton
-                    type="radio"
-                    id={id}
-                    name={name}
-                    value={displayValue}
-                    checked={displayValue === this.state[name]}
-                    onChange={this.changeHandler}
-                  /> */}
-                </ColorAttributeValue>
+                ></ColorAttributeValue>
               );
             })}
           </Attributes>
@@ -160,25 +137,11 @@ class ProductAttribute extends Component {
                   disabled={this.props.disable ? true : false}
                 >
                   {value}
-                  {/* <AttributeRadioButton
-                    type="radio"
-                    id={id}
-                    name={name}
-                    value={displayValue}
-                    checked={displayValue === this.state[name]}
-                    onChange={this.changeHandler}
-                  /> */}
                 </AttributeValue>
               );
             })}
           </Attributes>
         )}
-        {/* <Attributes >
-                        {items.map(({id, displayValue, value})=>{
-                            const color = displayValue !=="White"? value:"black";
-                            return type==="swatch"?<AttributeValue key={id} value={`${value}`} width="20px"  border={`${color}`} onClick={()=>this.setState({color:`${value}`})}/> : <AttributeValue key={id}>{value}</AttributeValue>          
-                        })}
-                </Attributes> */}
       </AttributeWrapper>
     );
   }

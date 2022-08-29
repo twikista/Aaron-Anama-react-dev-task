@@ -1,6 +1,6 @@
 import { Component } from "react";
 import styled from "styled-components";
-import emptyCart from "../assets/empty_cart.svg";
+import emptyCart from "../../assets/empty_cart.svg";
 import { connect } from "react-redux";
 
 const CartWrapper = styled.button`
@@ -39,7 +39,6 @@ const CartAmout = styled.span`
 
 class CartBadge extends Component {
   render() {
-    console.log(this.props.amount);
     return (
       <CartWrapper onClick={this.props.overLayToggler}>
         <CartImage src={emptyCart} />

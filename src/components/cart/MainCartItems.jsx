@@ -13,15 +13,10 @@ const CartItemsContainer = styled.div`
 class MainCartItems extends Component {
   render() {
     const { gap, width, maxHeight, cart = [] } = this.props;
-    console.log(cart);
     return (
       <CartItemsContainer gap={gap} width={width} maxHeight={maxHeight}>
         {cart.map((item) => (
-          <MainCartItem
-            key={item.id}
-            item={item}
-            // currentCurrency={this.props.currentCurrency}
-          />
+          <MainCartItem key={item.id} item={item} />
         ))}
       </CartItemsContainer>
     );

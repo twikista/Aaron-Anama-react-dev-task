@@ -1,4 +1,4 @@
-import { ADD_TO_CART, DISPLAY_VALIDATION_MESSAGE } from "../redux/actions";
+import { ADD_TO_CART, DISPLAY_VALIDATION_MESSAGE } from "./actions";
 
 export function validateAttributesMiddleware({ dispatch }) {
   return function (next) {

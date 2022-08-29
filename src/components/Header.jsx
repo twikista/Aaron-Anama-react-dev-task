@@ -1,8 +1,8 @@
 import { Component } from "react";
-import Categories from "./Categories";
+import Categories from "./header/Categories";
 import styled from "styled-components";
 import logo from "../assets/logo.png";
-import ActionItems from "./NavActionItems";
+import ActionItems from "./header/NavActionItems";
 
 const AppHeader = styled.header`
   width: 100%;
@@ -58,10 +58,6 @@ class Header extends Component {
           </LogoContainer>
           <Action>
             <ActionItems {...this.props} />
-            {/* <CurrencySelector
-              // getSelectedCurrency={this.props.getSelectedCurrency}
-            /> */}
-            {/* <CartBadge {...this.props} /> */}
           </Action>
         </HeaderWrapper>
       </AppHeader>

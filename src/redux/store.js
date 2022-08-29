@@ -1,7 +1,7 @@
 import { legacy_createStore, applyMiddleware, compose } from "redux";
 import reducer from "./reducer";
 import { loadStateFromLocalStorage } from "./localStoragePersist";
-import { validateAttributesMiddleware } from "../middleware/validateAttributesMiddleware";
+import { validateAttributesMiddleware } from "./validateAttributesMiddleware";
 
 const persistedState = loadStateFromLocalStorage();
 const storeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -11,8 +11,5 @@ const store = legacy_createStore(
   persistedState,
   storeEnhancers(applyMiddleware(validateAttributesMiddleware))
 );
-console.log(store);
-
-console.log(store.getState());
 
 export default store;

@@ -12,8 +12,6 @@ const MiniCartContainer = styled.article`
   right: 72px;
   padding: 32px 16px;
   display: grid;
-  /* display: flex; */
-  /* flex-direction: column; */
   gap: 32px;
   color: #1d1f22;
   line-height: 1.6;
@@ -27,12 +25,9 @@ const CartTop = styled.div`
   width: 293px;
   max-height: 538px;
   gap: 32px;
-  /* border: solid 2px orchid; */
 `;
 
-const CartHeader = styled.div`
-  /* margin-bottom: 32px; */
-`;
+const CartHeader = styled.div``;
 
 const CartHeading = styled.h3`
   font-weight: 700;
@@ -49,7 +44,6 @@ const HeadingSpan = styled.span`
 
 const CartTotal = styled.div`
   width: 289px;
-  /* height: 28px; */
   display: flex;
   justify-content: space-evenly;
   align-items: center;
@@ -115,7 +109,7 @@ const LinkWrapper = styled(Link)`
 
 class MiniCart extends Component {
   render() {
-    const { amount, tax, total, cart, currencyDetails } = this.props.state;
+    const { amount, total, cart, currencyDetails } = this.props.state;
     let symbol;
     if (currencyDetails) symbol = currencyDetails.symbol;
     return (
@@ -127,10 +121,7 @@ class MiniCart extends Component {
               <HeadingSpan>{amount} items</HeadingSpan>
             </CartHeading>
           </CartHeader>
-          <MinicartItems
-            // currentCurrency={this.props.currentCurrency}
-            cart={cart}
-          />
+          <MinicartItems cart={cart} />
           <CartTotal>
             <CartTotalLabel>total</CartTotalLabel>
             <CartTotalAmount>

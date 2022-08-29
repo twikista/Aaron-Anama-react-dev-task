@@ -1,10 +1,8 @@
 import React, { Component } from "react";
-// import Category from "./Category";
 import styled from "styled-components";
-import { categoriesData, item } from "../data";
 import { NavLink } from "react-router-dom";
 import uniqid from "uniqid";
-import { GET_CATEGORIES } from "../queries/queries";
+import { GET_CATEGORIES } from "../../queries/queries";
 import { Query } from "@apollo/client/react/components";
 
 const Nav = styled.nav`
@@ -62,7 +60,6 @@ class Categories extends Component {
                         <CategoryLink
                           category={name}
                           key={uniqid()}
-                          // to={name === "all" ? "/" : `/${name}`}
                           to={`/${name}`}
                         >
                           {name}

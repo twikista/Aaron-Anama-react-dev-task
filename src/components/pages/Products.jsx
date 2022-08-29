@@ -1,9 +1,8 @@
 import { Component } from "react";
 import styled from "styled-components";
-import ProductCard from "./ProductCard";
-import CartOverlay from "./CartOverlay";
-import withRouter from "./NavParamsHOC";
-import { Get_CATEGORY } from "../queries/queries";
+import ProductCard from "../ProductCard";
+import withRouter from "../utility/NavParamsHOC";
+import { Get_CATEGORY } from "../../queries/queries";
 import { Query } from "@apollo/client/react/components";
 
 const LandingPage = styled.div`
@@ -14,13 +13,10 @@ const ActiveCategory = styled.h2`
   font-weight: 400;
   color: #1d1f22;
   line-height: 1.6;
-  /* padding-top: 80px; */
 `;
 
 const ProductsWarpper = styled.section`
-  /* display: flex; */
   display: grid;
-  /* flex-direction: row; */
   grid-template-columns: repeat(auto-fill, calc(386px - 20px));
   justify-content: center;
   flex-wrap: wrap;
@@ -28,7 +24,6 @@ const ProductsWarpper = styled.section`
   align-items: center;
   padding-bottom: 50px;
   margin-top: 103px;
-  /* position: relative; */
 `;
 
 class Products extends Component {

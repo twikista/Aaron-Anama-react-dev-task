@@ -1,13 +1,15 @@
 import { Component } from "react";
 import styled from "styled-components";
-import ProductAttributes from "./ProductAtrributes";
-import ProductName from "./ProductName";
-import Price from "./Price";
-import ProductImage from "./ProductImage";
+import ProductAttributes from "../ProductAtrributes";
+import ProductName from "../ProductName";
+import Price from "../Price";
+import ProductImage from "../ProductImage";
 import CartItemAmountControls from "./CartItemAmountControls";
 
 const CartItemContainer = styled.article`
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 24px 121px;
+  grid-template-rows: 1fr;
   flex-direction: row;
   gap: 8px;
   width: 293px;
@@ -72,13 +74,8 @@ class MiniCartItem extends Component {
               spanFontWeight="300"
               item={item}
             />
-            {/* <CartItemPrice>
-                {prices[0].currency.symbol}
-                {prices[0].amount}
-              </CartItemPrice> */}
             <Price
               prices={item.prices}
-              // currentCurrency={this.props.currentCurrency}
               fontWeight="500"
               fontSize="16px"
               lineHeight="26px"
@@ -103,7 +100,6 @@ class MiniCartItem extends Component {
             id={item.id}
           />
         </CartItemDetailsWrapper>
-        {/* <CartItemRight url={`${gallery[0]}`} /> */}
         <ProductImage width="121px" gallery={[gallery[0]]} />
       </CartItemContainer>
     );
