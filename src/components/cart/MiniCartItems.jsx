@@ -9,7 +9,7 @@ const CartItemsContainer = styled.div`
   gap: 40px;
   width: 293px;
   max-height: 420px;
-  overflow: hidden scroll;
+  overflow: hidden auto;
 
   &::-webkit-scrollbar {
     width: 2vw;

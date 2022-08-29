@@ -22,7 +22,7 @@ const Container = styled.section`
 const ImageThumbNails = styled.article`
   width: 100%;
   height: 440px;
-  overflow: hidden scroll;
+  overflow: hidden auto;
   gap: 40px;
   display: flex;
   flex-direction: column;
@@ -102,7 +102,7 @@ const ProductDesriptionWrapper = styled.div`
   font-size: 16px;
   line-height: 159.96%;
   height: 103px;
-  overflow-y: scroll;
+  overflow-y: auto;
 `;
 
 const styles = {
@@ -160,25 +160,27 @@ class Product extends Component {
           <Query query={GET_PRODUCT} variables={{ id }}>
             {({ loading, error, data }) => {
               if (loading) return <p>loading...</p>;
-              if (error) console.log(error);
+              if (error) return <p>Error fecthing product details</p>;
               if (data) {
                 const { label } = this.props.currencyDetails;
                 const activePrice = data.product.prices.find(
                   (i) => i.currency.label === label
                 );
+                const length = data.product.gallery.length;
 
                 return (
                   <>
                     <Container>
                       <ImageThumbNails>
-                        {data.product.gallery.map((url, index) => (
-                          <ImageThumbNail
-                            key={uniqid()}
-                            src={url}
-                            alt={`${data.product.name} image-${index + 1}`}
-                            onClick={() => this.imageToggler(url)}
-                          />
-                        ))}
+                        {length > 1 &&
+                          data.product.gallery.map((url, index) => (
+                            <ImageThumbNail
+                              key={uniqid()}
+                              src={url}
+                              alt={`${data.product.name} image-${index + 1}`}
+                              onClick={() => this.imageToggler(url)}
+                            />
+                          ))}
                       </ImageThumbNails>
                       <ProductDetailsWrapper>
                         <ImageWrapper>

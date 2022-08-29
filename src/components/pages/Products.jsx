@@ -29,7 +29,7 @@ const ProductsWarpper = styled.section`
 class Products extends Component {
   render() {
     const params = this.props.params;
-    const title = Object.keys(params).length ? params.category : "all";
+    const title = params.category || "all";
 
     return (
       <>
@@ -37,13 +37,13 @@ class Products extends Component {
           <Query query={Get_CATEGORY} variables={{ title }}>
             {({ loading, error, data }) => {
               if (loading) return <p>loading...</p>;
-              if (error) console.log(error);
+              if (error) return <p>Error fecthing category data</p>;
 
               return (
                 <LandingPage>
                   <ActiveCategory>{title.toUpperCase()}</ActiveCategory>
                   <ProductsWarpper>
-                    {data &&
+                    {data && data.category.products.length ? (
                       data.category.products.map((product) => (
                         <ProductCard
                           key={product.id}
@@ -52,7 +52,10 @@ class Products extends Component {
                           activeCategory={title}
                           setCurrentPrice={this.props.setCurrentPrice}
                         />
-                      ))}
+                      ))
+                    ) : (
+                      <p>No product found in this category</p>
+                    )}
                   </ProductsWarpper>
                 </LandingPage>
               );
