@@ -3,6 +3,7 @@ import Categories from "./header/Categories";
 import styled from "styled-components";
 import logo from "../assets/logo.png";
 import ActionItems from "./header/NavActionItems";
+import { Link } from "react-router-dom";
 
 const AppHeader = styled.header`
   width: 100%;
@@ -37,6 +38,10 @@ const Logo = styled.img`
   height: 41px;
 `;
 
+const HomeLink = styled(Link)`
+  text-decoration: none;
+`;
+
 const Action = styled.div`
   display: flex;
   justify-content: flex-end;
@@ -54,7 +59,9 @@ class Header extends Component {
             <Categories />
           </NavWrapper>
           <LogoContainer>
-            <Logo src={logo} />
+            <HomeLink to={`/all`}>
+              <Logo src={logo} />
+            </HomeLink>
           </LogoContainer>
           <Action>
             <ActionItems {...this.props} />

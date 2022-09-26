@@ -31,7 +31,9 @@ const ImageThumbNails = styled.article`
 `;
 const ImageThumbNail = styled.img`
   width: 80px;
-  height: 80px;
+  max-height: 80px;
+  object-fit: cover;
+  object-position: 50% 0%;
   cursor: pointer;
 `;
 
@@ -44,10 +46,16 @@ const ProductDetailsWrapper = styled.div`
 const ImageWrapper = styled.div`
   width: 610px;
   height: 511px;
+  /* background-color: #e2e7e5; */
+  /* background-image: url(${(props) => props.url});
+  background-repeat: no-repeat;
+  background-size: cover; */
 `;
 const ProductImage = styled.img`
   width: 100%;
-  height: 100%;
+  max-height: 100%;
+  object-fit: cover;
+  object-position: 50% 0%;
 `;
 
 const ProductDetails = styled.article`
@@ -183,7 +191,13 @@ class Product extends Component {
                           ))}
                       </ImageThumbNails>
                       <ProductDetailsWrapper>
-                        <ImageWrapper>
+                        <ImageWrapper
+                          url={
+                            this.state.imageUrl
+                              ? this.state.imageUrl
+                              : data.product.gallery[0]
+                          }
+                        >
                           <ProductImage
                             src={
                               this.state.imageUrl
