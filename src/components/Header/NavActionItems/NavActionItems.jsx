@@ -48,6 +48,24 @@ class ActionItems extends Component {
     }
   };
 
+  renderCurrencyOptions = (currencies) => {
+    return currencies.map((currency) => {
+      return (
+        <CurrencyOption
+          key={uniqid()}
+          name="label"
+          value={currency.label}
+          onClick={(e) =>
+            this.onChangeHandler(currency.label, currency.symbol, e)
+          }
+        >
+          <CurrencySymbol>{currency.symbol}</CurrencySymbol>
+          {currency.label}
+        </CurrencyOption>
+      );
+    });
+  };
+
   componentDidMount() {
     document.body.addEventListener("click", this.closeDropDownListener);
   }
@@ -78,6 +96,7 @@ class ActionItems extends Component {
                 const [renderedSymbol] = currencies.filter((i) =>
                   i.label === this.state.label ? i : null
                 );
+
                 return (
                   <ActionContainer>
                     <ActionItemsWrapper>
@@ -99,28 +118,7 @@ class ActionItems extends Component {
                         className="drop-down"
                         ref={this.dropDownRef}
                       >
-                        {currencies.map((currency) => {
-                          return (
-                            <CurrencyOption
-                              key={uniqid()}
-                              name="label"
-                              value={currency.label}
-                              onClick={(e) =>
-                                this.onChangeHandler(
-                                  currency.label,
-                                  currency.symbol,
-                                  e
-                                )
-                              }
-                            >
-                              <CurrencySymbol>
-                                {" "}
-                                {currency.symbol}
-                              </CurrencySymbol>
-                              {currency.label}
-                            </CurrencyOption>
-                          );
-                        })}
+                        {this.renderCurrencyOptions(currencies)}
                       </CurrencyList>
                     )}
                   </ActionContainer>
