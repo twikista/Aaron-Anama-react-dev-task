@@ -1,9 +1,9 @@
 import { Component } from "react";
-import MainCart from "./components/pages/MainCart";
-import Header from "./components/Header";
-import Main from "./components/Main";
-import Product from "./components/pages/Product";
-import Products from "./components/pages/Products";
+import MainCart from "./components/pages/Main/MainCart/MainCart";
+import Header from "./components/Header/Header";
+import Main from "./components/pages/Main/Main";
+import Product from "./components/pages/Main/Product/Product";
+import Products from "./components/pages/Main/Products/Products";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { connect } from "react-redux";
 import { sumCartAmount } from "./redux/actionType";
@@ -17,6 +17,10 @@ class App extends Component {
     });
   };
 
+  closeMiniCartOverlay = () => {
+    return this.setState({ open: false });
+  };
+
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.state.cart !== this.props.state.cart) {
       this.props.dispatch(sumCartAmount());
@@ -24,16 +28,17 @@ class App extends Component {
   }
 
   render() {
+    const { open } = this.state;
     return (
       <div className="App">
-        <Header overLayToggler={this.overLayToggler} />
-        <Main isOpen={this.state.open} overLayToggler={this.overLayToggler}>
+        <Header
+          overLayToggler={this.overLayToggler}
+          closeMiniCartOverlay={this.closeMiniCartOverlay}
+        />
+        <Main isOpen={open} overLayToggler={this.overLayToggler}>
           <Routes>
             <Route path={"/"} element={<Navigate to="all" />} />
-            <Route
-              path="/:category"
-              element={<Products isOpen={this.state.open} />}
-            />
+            <Route path="/:category" element={<Products isOpen={open} />} />
             <Route path="/:category/:product" element={<Product />} />
             <Route path="/cart" element={<MainCart />} />
           </Routes>
