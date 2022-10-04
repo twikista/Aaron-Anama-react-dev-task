@@ -33,6 +33,21 @@ const styles = {
   colorAttributeValue: {
     width: "36px",
   },
+  priceStyles: {
+    fontWeight: "700",
+    fontSize: "24px",
+    lineHeight: "24px",
+    fontFamily: "Raleway",
+  },
+};
+
+const productNameStyles = {
+  fontFamily: "Raleway",
+  fontWeight: "600",
+  fontSize: "30px",
+  lineHeight: "27px",
+  color: "#1d1f22",
+  spanFontWeight: "400",
 };
 
 class MainCartItem extends Component {
@@ -44,22 +59,8 @@ class MainCartItem extends Component {
       <CartItemContainer>
         <CartItemDetailsWrapper>
           <CartItemDetails>
-            <ProductName
-              fontFamily="Raleway"
-              fontWeight="600"
-              fontSize="30px"
-              lineHeight="27px"
-              color="#1d1f22"
-              spanFontWeight="400"
-              item={item}
-            />
-            <Price
-              prices={item.prices}
-              fontWeight="700"
-              fontSize="24px"
-              lineHeight="24px"
-              fontFamily="Raleway"
-            />
+            <ProductName styles={productNameStyles} item={item} />
+            <Price prices={item.prices} styles={styles.priceStyles} />
             <ProductAttributes
               attributes={item.attributes}
               styles={styles}
@@ -69,15 +70,7 @@ class MainCartItem extends Component {
               }
             />
           </CartItemDetails>
-          <CartItemAmountControls
-            wrapperWidth="24px"
-            iconHeight="24px"
-            fontWeight="500"
-            fontSize="16px"
-            lineHeight="1.6"
-            amount={item.amount}
-            id={item.id}
-          />
+          <CartItemAmountControls amount={item.amount} id={item.id} />
         </CartItemDetailsWrapper>
         <ProductImage width="200px" gallery={gallery} />
       </CartItemContainer>

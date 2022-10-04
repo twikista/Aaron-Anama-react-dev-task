@@ -1,10 +1,10 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import uniqid from "uniqid";
 import { GET_CATEGORIES } from "../../../queries/queries";
 import { Query } from "@apollo/client/react/components";
 import { Nav, CategoryLink } from "./Categories.styles";
 
-class Categories extends Component {
+class Categories extends PureComponent {
   render() {
     const { closeMiniCartOverlay } = this.props;
     return (

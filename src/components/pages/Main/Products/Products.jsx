@@ -1,4 +1,4 @@
-import { Component } from "react";
+import { PureComponent } from "react";
 import ProductCard from "./ProductCard/ProductCard";
 import withRouter from "../../../utility/NavParamsHOC";
 import { Get_CATEGORY } from "../../../../queries/queries";
@@ -9,7 +9,7 @@ import {
   ProductsWarpper,
 } from "./Products.styles";
 
-class Products extends Component {
+class Products extends PureComponent {
   render() {
     const {
       params: { category } = {},

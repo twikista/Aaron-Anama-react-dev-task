@@ -1,9 +1,9 @@
-import { Component } from "react";
+import { PureComponent } from "react";
 import emptyCart from "../../../assets/empty_cart.svg";
 import { connect } from "react-redux";
 import { CartWrapper, CartImage, CartAmout } from "./CartBadge.styles";
 
-class CartBadge extends Component {
+class CartBadge extends PureComponent {
   render() {
     const { overLayToggler, amount } = this.props;
     return (

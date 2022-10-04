@@ -1,4 +1,4 @@
-import { Component } from "react";
+import { PureComponent } from "react";
 import plusIcon from "../../assets/plus-square.svg";
 import minusIcon from "../../assets/minus-square.svg";
 import { increaseAmount, decreaseAmount } from "../../redux/actionType";
@@ -9,36 +9,20 @@ import {
   Amount,
 } from "./CartItemAmountControls.styles";
 
-class CartItemAmountControls extends Component {
+class CartItemAmountControls extends PureComponent {
   render() {
-    const {
-      id,
-      wrapperWidth,
-      iconHeight,
-      fontWeight,
-      fontSize,
-      lineHeight,
-      amount,
-    } = this.props;
+    const { id, amount } = this.props;
     return (
-      <ControlWrapper wrapperWidth={wrapperWidth}>
+      <ControlWrapper>
         <AmountControlIcon
           src={`${plusIcon}`}
           alt="plus icon"
-          iconHeight={iconHeight}
           onClick={() => this.props.increaseAmount({ id })}
         />
-        <Amount
-          fontWeight={fontWeight}
-          fontSize={fontSize}
-          lineHeight={lineHeight}
-        >
-          {amount}
-        </Amount>
+        <Amount>{amount}</Amount>
         <AmountControlIcon
           src={`${minusIcon}`}
           alt="minus icon"
-          iconHeight={iconHeight}
           onClick={() => this.props.decreaseAmount({ id })}
         />
       </ControlWrapper>

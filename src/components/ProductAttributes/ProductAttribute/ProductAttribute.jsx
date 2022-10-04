@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import {
   AttributeWrapper,
   AttributeTitle,
@@ -7,7 +7,7 @@ import {
   ColorAttributeValue,
 } from "./ProductAttribute.styles";
 
-class ProductAttribute extends Component {
+class ProductAttribute extends PureComponent {
   initialState = this.props.selectedAttributes
     ? this.props.selectedAttributes
     : {};

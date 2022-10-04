@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import CartBadge from "../CartBadge/CartBadge";
 import { GET_CURRENCIES } from "../../../queries/queries";
 import { Query } from "@apollo/client/react/components";
@@ -17,7 +17,7 @@ import {
   CurrencySymbol,
 } from "./NavActionItem.styles";
 
-class ActionItems extends Component {
+class ActionItems extends PureComponent {
   initialState = {
     label: this.props.currencyDetails.label,
     symbol: this.props.currencyDetails.symbol,
@@ -84,6 +84,7 @@ class ActionItems extends Component {
   }
 
   render() {
+    console.log("rendered");
     return (
       <>
         {

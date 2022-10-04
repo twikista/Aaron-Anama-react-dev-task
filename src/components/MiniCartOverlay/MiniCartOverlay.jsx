@@ -1,8 +1,8 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import MiniCart from "./MiniCart/MiniCart";
 import Overlay from "../Overlay/Overlay";
 
-class MiniCartOverlay extends Component {
+class MiniCartOverlay extends PureComponent {
   closeOnOverLayClick = (e) => {
     if (e.currentTarget !== e.target) return;
     this.props.overLayToggler();

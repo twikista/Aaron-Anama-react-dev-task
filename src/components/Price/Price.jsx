@@ -1,14 +1,12 @@
-import { Component } from "react";
+import { PureComponent } from "react";
 import { connect } from "react-redux";
 import { ProductPrice } from "./Price.styles";
 
-class Price extends Component {
+class Price extends PureComponent {
   render() {
     const {
       prices,
-      fontWeight,
-      fontSize,
-      lineHeight,
+      styles: { fontWeight, fontSize, lineHeight },
       currencyDetails = {},
     } = this.props;
     if (currencyDetails) {

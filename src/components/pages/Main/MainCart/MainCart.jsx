@@ -1,4 +1,4 @@
-import { Component } from "react";
+import { PureComponent } from "react";
 import MainCartItems from "./MainCartItems/MainCartItems";
 import { connect } from "react-redux";
 import {
@@ -13,7 +13,39 @@ import {
   EmptyCartMessage,
 } from "./MainCart.styles";
 
-class MainCart extends Component {
+class MainCart extends PureComponent {
+  renderTotalTax = (currencySymbol, taxAmount) => {
+    return (
+      <CartTotalItem>
+        <CartSubTotalLabel>tax 21%:</CartSubTotalLabel>
+        <CartTotalAmount>
+          {currencySymbol}
+          {`${taxAmount.toFixed(2)}`}
+        </CartTotalAmount>
+      </CartTotalItem>
+    );
+  };
+
+  renderTotalQuantity = (amount) => {
+    return (
+      <CartTotalItem>
+        <CartSubTotalLabel>quantity:</CartSubTotalLabel>
+        <CartTotalAmount>{amount}</CartTotalAmount>
+      </CartTotalItem>
+    );
+  };
+
+  renderCartTotal = (symbol, total) => {
+    return (
+      <CartTotalItem>
+        <CartTotalLabel>total:</CartTotalLabel>
+        <CartTotalAmount>
+          {symbol}
+          {`${total.toFixed(2)}`}
+        </CartTotalAmount>
+      </CartTotalItem>
+    );
+  };
   render() {
     const { amount, tax, total, cart, currencyDetails } = this.props.state;
     const { symbol } = currencyDetails;
@@ -24,24 +56,9 @@ class MainCart extends Component {
           <>
             <MainCartItems cart={cart} />
             <CartTotalWrapper>
-              <CartTotalItem>
-                <CartSubTotalLabel>tax 21%:</CartSubTotalLabel>
-                <CartTotalAmount>
-                  {symbol}
-                  {`${tax.toFixed(2)}`}
-                </CartTotalAmount>
-              </CartTotalItem>
-              <CartTotalItem>
-                <CartSubTotalLabel>quantity:</CartSubTotalLabel>
-                <CartTotalAmount>{amount}</CartTotalAmount>
-              </CartTotalItem>
-              <CartTotalItem>
-                <CartTotalLabel>total:</CartTotalLabel>
-                <CartTotalAmount>
-                  {symbol}
-                  {`${total.toFixed(2)}`}
-                </CartTotalAmount>
-              </CartTotalItem>
+              {this.renderTotalTax(symbol, tax)}
+              {this.renderTotalQuantity(amount)}
+              {this.renderCartTotal(symbol, total)}
               <OrderButton>order</OrderButton>
             </CartTotalWrapper>
           </>

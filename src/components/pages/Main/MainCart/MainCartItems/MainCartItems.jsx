@@ -1,8 +1,8 @@
-import { Component } from "react";
+import { PureComponent } from "react";
 import MainCartItem from "./MainCartItem/MainCartItem";
 import { CartItemsContainer } from "./MainCartaItems.styles";
 
-class MainCartItems extends Component {
+class MainCartItems extends PureComponent {
   render() {
     const { gap, width, maxHeight, cart = [] } = this.props;
     return (

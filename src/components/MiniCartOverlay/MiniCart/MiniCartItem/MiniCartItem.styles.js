@@ -7,7 +7,7 @@ export const CartItemContainer = styled.article`
   flex-direction: row;
   gap: 8px;
   width: 293px;
-  min-height: 120px;
+  min-height: ${(props) => props.minHeight};
 `;
 
 export const CartItemDetailsWrapper = styled.div`

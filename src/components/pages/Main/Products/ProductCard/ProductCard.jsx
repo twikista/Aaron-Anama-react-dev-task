@@ -1,4 +1,4 @@
-import { Component } from "react";
+import { PureComponent } from "react";
 import Price from "../../../../Price/Price";
 import addAproductIcon from "../../../../../assets/add_product_icon.svg";
 import { connect } from "react-redux";
@@ -15,7 +15,13 @@ import {
   Container,
 } from "./ProductCard.styles";
 
-class ProductCard extends Component {
+const priceStyles = {
+  fontWeight: "500",
+  fontSize: "18px",
+  lineHeight: "29px",
+};
+
+class ProductCard extends PureComponent {
   state = { selectedAtrributes: {} };
 
   render() {
@@ -30,12 +36,7 @@ class ProductCard extends Component {
         <ProductImage url={`${gallery[0]}`} />
         <CardContent>
           <ProductName>{name}</ProductName>
-          <Price
-            prices={prices}
-            fontWeight="500"
-            fontSize="18px"
-            lineHeight="29px"
-          />
+          <Price prices={prices} styles={priceStyles} />
         </CardContent>
         {inStock || <OutOfStockOverlay>out of stock</OutOfStockOverlay>}
       </Container>
@@ -44,7 +45,7 @@ class ProductCard extends Component {
       <>
         <CardWrapper>
           <WrappingLink to={`/${activeCategory}/${id}`}>{content}</WrappingLink>
-          {attributes.length === 0 && (
+          {inStock && attributes.length === 0 && (
             <AddToCartIcon
               src={`${addAproductIcon}`}
               onClick={() =>

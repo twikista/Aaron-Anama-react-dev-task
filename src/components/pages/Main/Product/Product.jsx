@@ -1,4 +1,4 @@
-import { Component } from "react";
+import { PureComponent } from "react";
 import uniqid from "uniqid";
 import ProductAttributes from "../../../ProductAttributes/ProductAtrributes";
 import ProductName from "../../../ProductName/ProductName";
@@ -47,9 +47,25 @@ const styles = {
   colorAttributeValue: {
     width: "36px",
   },
+  priceStyles: {
+    fontWeight: "700",
+    fontSize: "24px",
+    lineHeight: "18px",
+  },
 };
 
-class Product extends Component {
+const productNameStyles = {
+  fontFamily: "Raleway",
+  fontWeight: "400",
+  fontSize: "30px",
+  lineHeight: "27px",
+  color: "#1d1f22",
+  marginBottom: "43px",
+  spanFontWeight: "600",
+  spanMarginBottom: "16px",
+};
+
+class Product extends PureComponent {
   state = {
     imageUrl: "",
     selectedAttributes: {},
@@ -68,6 +84,64 @@ class Product extends Component {
         selectedAttributes: { ...prevState.selectedAttributes, ...attribute },
       };
     });
+  };
+
+  renderImageThumbnail = (gallery, name) => {
+    return gallery.map((url, index) => {
+      return (
+        <ImageThumbNail
+          key={uniqid()}
+          src={url}
+          alt={`${name} image-${index + 1}`}
+          onClick={() => this.imageToggler(url)}
+        />
+      );
+    });
+  };
+
+  renderProductImage = (imageUrl, gallery, name) => {
+    return (
+      <ImageWrapper>
+        <ProductImage src={imageUrl ? imageUrl : gallery[0]} alt={name} />
+      </ImageWrapper>
+    );
+  };
+
+  renderProductName = (style, data) => {
+    return <ProductName styles={style} item={data.product} {...this.props} />;
+  };
+
+  renderProductAttributes = (attributes, inStock) => {
+    return (
+      <ProductAttributes
+        attributes={attributes}
+        styles={styles}
+        width="292px"
+        uppercase="uppercase"
+        selectedAttributesHandler={this.selectedAttributesHandler}
+        disable={!inStock}
+        {...this.props}
+      />
+    );
+  };
+
+  renderProductPrice = (prices) => {
+    return (
+      <ProductPriceWrapper>
+        <ProductpriceLabel>price</ProductpriceLabel>
+        <Price prices={prices} styles={styles.priceStyles} />
+      </ProductPriceWrapper>
+    );
+  };
+
+  cartItem = (data, activePrice) => {
+    return {
+      ...data.product,
+      id: uniqid(),
+      selectedAttributes: this.state.selectedAttributes,
+      amount: 1,
+      activePrice: activePrice,
+    };
   };
 
   render() {
@@ -107,66 +181,17 @@ class Product extends Component {
                   <>
                     <Container>
                       <ImageThumbNails>
-                        {length > 1 &&
-                          gallery.map((url, index) => (
-                            <ImageThumbNail
-                              key={uniqid()}
-                              src={url}
-                              alt={`${name} image-${index + 1}`}
-                              onClick={() => this.imageToggler(url)}
-                            />
-                          ))}
+                        {length > 1 && this.renderImageThumbnail(gallery, name)}
                       </ImageThumbNails>
                       <ProductDetailsWrapper>
-                        <ImageWrapper url={imageUrl ? imageUrl : gallery[0]}>
-                          <ProductImage
-                            src={imageUrl ? imageUrl : gallery[0]}
-                            alt={name}
-                          />
-                        </ImageWrapper>
+                        {this.renderProductImage(imageUrl, gallery, name)}
                         <ProductDetails>
-                          <ProductName
-                            fontFamily="Raleway"
-                            fontWeight="400"
-                            fontSize="30px"
-                            lineHeight="27px"
-                            color="#1d1f22"
-                            marginBottom="43px"
-                            spanFontWeight="600"
-                            spanMarginBottom="16px"
-                            item={data.product}
-                            {...this.props}
-                          />
-                          <ProductAttributes
-                            attributes={attributes}
-                            styles={styles}
-                            width="292px"
-                            uppercase="uppercase"
-                            selectedAttributesHandler={
-                              this.selectedAttributesHandler
-                            }
-                            disable={!inStock}
-                            {...this.props}
-                          />
-                          <ProductPriceWrapper>
-                            <ProductpriceLabel>price</ProductpriceLabel>
-                            <Price
-                              prices={prices}
-                              fontWeight="700"
-                              fontSize="24px"
-                              lineHeight="18px"
-                            />
-                          </ProductPriceWrapper>
+                          {this.renderProductName(productNameStyles, data)}
+                          {this.renderProductAttributes(attributes, inStock)}
+                          {this.renderProductPrice(prices)}
                           <AddToCartButton
                             onClick={() =>
-                              addToCart({
-                                ...data.product,
-                                id: uniqid(),
-                                selectedAttributes:
-                                  this.state.selectedAttributes,
-                                amount: 1,
-                                activePrice: activePrice,
-                              })
+                              addToCart(this.cartItem(data, activePrice))
                             }
                             disabled={!inStock}
                           >

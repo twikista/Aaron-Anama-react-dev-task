@@ -1,4 +1,4 @@
-import { Component } from "react";
+import { PureComponent } from "react";
 import Categories from "./Categories/Categories";
 import logo from "../../assets/logo.png";
 import ActionItems from "./NavActionItems/NavActionItems";
@@ -12,7 +12,7 @@ import {
   Action,
 } from "./Header.styles";
 
-class Header extends Component {
+class Header extends PureComponent {
   render() {
     return (
       <AppHeader>

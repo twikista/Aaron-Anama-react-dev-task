@@ -1,8 +1,8 @@
-import { Component } from "react";
+import { PureComponent } from "react";
 import ProductAttribute from "./ProductAttribute/ProductAttribute";
 import { AttributeContainer } from "./ProductAttributes.styles";
 
-class ProductAttributes extends Component {
+class ProductAttributes extends PureComponent {
   state = {};
 
   render() {

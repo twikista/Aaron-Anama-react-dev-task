@@ -1,4 +1,4 @@
-import { Component } from "react";
+import { PureComponent } from "react";
 
 import caretLeft from "../../assets/caret_left.svg";
 import caretRight from "../../assets/caret_right.svg";
@@ -9,7 +9,7 @@ import {
   Caret,
 } from "./ProductImage.styles";
 
-class ProductImage extends Component {
+class ProductImage extends PureComponent {
   state = {
     index: 0,
   };

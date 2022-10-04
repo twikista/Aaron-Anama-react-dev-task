@@ -1,4 +1,4 @@
-import { Component } from "react";
+import { PureComponent } from "react";
 import ProductAttributes from "../../../ProductAttributes/ProductAtrributes";
 import ProductName from "../../../ProductName/ProductName";
 import Price from "../../../Price/Price";
@@ -33,32 +33,34 @@ const styles = {
   colorAttributeValue: {
     width: "20px",
   },
+  productNameStyles: {
+    fontFamily: "Raleway",
+    fontWeight: "300",
+    fontSize: "16px",
+    lineHeight: "1.6",
+    color: "#1d1f22",
+    spanFontWeight: "300",
+  },
+  priceStyles: {
+    fontWeight: "500",
+    fontSize: "16px",
+    lineHeight: "26px",
+    fontFamily: "Raleway",
+  },
 };
 
-class MiniCartItem extends Component {
+class MiniCartItem extends PureComponent {
   render() {
     const { item } = this.props;
     const { gallery } = item;
     return (
-      <CartItemContainer>
+      <CartItemContainer
+        minHeight={item.attributes.length > 0 ? null : "120px"}
+      >
         <CartItemDetailsWrapper>
           <CartItemDetails>
-            <ProductName
-              fontFamily="Raleway"
-              fontWeight="300"
-              fontSize="16px"
-              lineHeight="1.6"
-              color="#1d1f22"
-              spanFontWeight="300"
-              item={item}
-            />
-            <Price
-              prices={item.prices}
-              fontWeight="500"
-              fontSize="16px"
-              lineHeight="26px"
-              fontFamily="Raleway"
-            />
+            <ProductName styles={styles.productNameStyles} item={item} />
+            <Price prices={item.prices} styles={styles.priceStyles} />
             <ProductAttributes
               attributes={item.attributes}
               styles={styles}
@@ -68,17 +70,9 @@ class MiniCartItem extends Component {
               }
             />
           </CartItemDetails>
-          <CartItemAmountControls
-            wrapperWidth="24px"
-            iconHeight="24px"
-            fontWeight="500"
-            fontSize="16px"
-            lineHeight="1.6"
-            amount={item.amount}
-            id={item.id}
-          />
+          <CartItemAmountControls amount={item.amount} id={item.id} />
         </CartItemDetailsWrapper>
-        <ProductImage width="121px" gallery={[gallery[0]]} />
+        <ProductImage width="121px" height="100%" gallery={[gallery[0]]} />
       </CartItemContainer>
     );
   }

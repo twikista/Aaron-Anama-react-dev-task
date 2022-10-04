@@ -1,16 +1,27 @@
-import { Component } from "react";
+import { PureComponent } from "react";
 import {
   ProductNameWrapper,
   ProductNameSpan,
   ProductNameHeading,
 } from "./ProductName.styles";
 
-class ProductName extends Component {
+class ProductName extends PureComponent {
   render() {
-    const { fontFamily, fontWeight, fontSize, lineHeight, color, item } =
-      this.props;
+    const {
+      styles: {
+        fontFamily,
+        fontWeight,
+        fontSize,
+        lineHeight,
+        color,
+        marginBottom,
+        spanFontWeight,
+        spanMarginBottom,
+      } = {},
+      item,
+    } = this.props;
     return (
-      <ProductNameWrapper marginBottom={this.props.marginBottom}>
+      <ProductNameWrapper marginBottom={marginBottom}>
         <ProductNameHeading
           fontFamily={fontFamily}
           fontWeight={fontWeight}
@@ -19,8 +30,8 @@ class ProductName extends Component {
           color={color}
         >
           <ProductNameSpan
-            spanFontWeight={this.props.spanFontWeight}
-            spanMarginBottom={this.props.spanMarginBottom}
+            spanFontWeight={spanFontWeight}
+            spanMarginBottom={spanMarginBottom}
           >
             {item.brand}
           </ProductNameSpan>

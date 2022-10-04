@@ -5,17 +5,17 @@ export const ControlWrapper = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  width: ${(props) => props.wrapperWidth};
+  width: 24px;
   align-self: stretch;
 `;
 export const AmountControlIcon = styled.img`
   width: 100%;
-  height: ${(props) => props.iconHeight};
+  height: 24px;
   cursor: pointer;
 `;
 
 export const Amount = styled.span`
-  font-weight: ${(props) => props.fontWeight};
-  font-size: ${(props) => props.fontSize};
-  line-height: ${(props) => props.lineHeight};
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.6;
 `;

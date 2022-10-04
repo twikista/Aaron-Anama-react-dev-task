@@ -1,4 +1,4 @@
-import { Component } from "react";
+import { PureComponent } from "react";
 import MinicartItems from "./MiniCartItems/MiniCartItems";
 import { connect } from "react-redux";
 import {
@@ -16,7 +16,7 @@ import {
   LinkWrapper,
 } from "./MiniCart.styles";
 
-class MiniCart extends Component {
+class MiniCart extends PureComponent {
   render() {
     const { amount, total, cart, currencyDetails } = this.props.state;
     let symbol;

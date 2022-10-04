@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import Overlay from "../../../../Overlay/Overlay";
 import { connect } from "react-redux";
 import { CLOSE_VALIDATION_MESSAGE } from "../../../../../redux/actions";
@@ -9,7 +9,7 @@ import {
   CloseModalButton,
 } from "./ValidationModal.styles";
 
-class ValidationModal extends Component {
+class ValidationModal extends PureComponent {
   render() {
     const showModal = this.props.showValidationModal;
     return (

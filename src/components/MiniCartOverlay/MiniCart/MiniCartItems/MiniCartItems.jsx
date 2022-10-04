@@ -1,8 +1,8 @@
-import { Component } from "react";
+import { PureComponent } from "react";
 import MiniCartItem from "../MiniCartItem/MiniCartItem";
 import { CartItemsContainer } from "./MiniCartItems.styles";
 
-class MinicartItems extends Component {
+class MinicartItems extends PureComponent {
   render() {
     const { cart = [] } = this.props;
     return (
