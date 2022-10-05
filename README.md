@@ -1,6 +1,6 @@
-# Frontend Implementation of GraphQL E-commerce server
+# GraphQL-Based E-commerce Store
 
-This project is a frontend implentation of a GraphQL based e-commerce server. The application's UI is implemented with React, while Apollo Client is used to make remote calls to server and manage general UI state. Moreover, Redux and Local Storage are used to manage cart state and persist Redux state respectively.
+This project utilizes a graphql e-commerce API to implement the frontend of an e-commerce store. The store features a product listing page (which render products based on the selected category), a product page (which provide more information about a selected product, enable users to choose preferred product attributes, and add the product to cart), and a Cart page (which lists all products in the cart and provides a summary of the total quantity and total amount of products in cart).
 
 ## Table of contents
 
@@ -14,12 +14,13 @@ This project is a frontend implentation of a GraphQL based e-commerce server. Th
 
 ## Implemented Features
 
-- A particular item can be added to cart only once. Subsequent click of the 'add to cart' button increase the amount of the item in cart
-- Decreasing cart item amount below 1 removes the item from cart
-- items can be added to cart only when attributes are selected (except where item does not have any attribute)
-- Total amount of items in cart are dynamcally displayed on cart badge
-- Minicart overlay can be closed on click outside the minicart
-- Items that are out of stock are not clickable
+- The store can scale to render any number of categories
+- Cart badge which dynamically displays the number of items in cart
+- Switch store currency (currently 5 currencies but scalable to any number of currencies)
+- Directly add products to cart from listing page (for products with no attributes)
+- Items in cart are persisted between browsing sessions
+- Indicate products that are not in stock (not addable to cart)
+- Minicart which provides quick summary of items in cart
 
 ## Technology Used
 
@@ -28,6 +29,7 @@ This project is a frontend implentation of a GraphQL based e-commerce server. Th
 - Redux
 - React Router
 - Styled Compnents
+- Localstorage
 
 ## 3rd Party Libraries
 
@@ -43,7 +45,7 @@ This project is a frontend implentation of a GraphQL based e-commerce server. Th
 
 To run this application locally:
 
-1. Get the GraphQL endpoint and the instruction to launch it from [end point](https://github.com/scandiweb/junior-react-endpoint)
+1. Get the GraphQL endpoint and follow the instruction to launch it from [HERE](https://github.com/scandiweb/junior-react-endpoint)
 
 2. Clone this repo
 

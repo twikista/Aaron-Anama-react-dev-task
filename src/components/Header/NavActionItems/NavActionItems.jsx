@@ -84,7 +84,6 @@ class ActionItems extends PureComponent {
   }
 
   render() {
-    console.log("rendered");
     return (
       <>
         {
